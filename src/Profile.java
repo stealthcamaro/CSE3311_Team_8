@@ -22,9 +22,6 @@ public class Profile {          //contain everything connected to a users 'user 
         this.password = password;
     }
 
-    public String toString(){
-        return this.username + ", " + this.student_id + ", " + this.student_email + "\n";
-    }
     
   
 }
