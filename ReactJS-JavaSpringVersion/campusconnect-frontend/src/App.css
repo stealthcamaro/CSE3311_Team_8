@@ -1,0 +1,89 @@
+.App {
+  background-color: #0D0D0D;  /* space black */
+  color: white;
+  min-height: 100vh; /*ensures the whole page takes up height */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #1A1A1A; /* dark gray for contrast */
+  padding: 10px;
+}
+
+.bar-button {
+  background-color: #2C2C2C;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.bar-button:hover {
+  background-color: #3E3E3E;
+}
+
+/* Ensures the whole page remains black with no white space */
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  height: 100%;
+}
+
+
+/* Rest of your CSS remains the same */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #333333;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  width: 400px;
+}
+
+.modal textarea {
+  width: 100%;
+  background-color: #1A1A1A;
+  color: white;
+  border: 1px solid #555555;
+  border-radius: 5px;
+  padding: 10px;
+  resize: none;
+}
+
+.modal button {
+  margin-top: 10px;
+  background-color: #2C2C2C;
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.modal button:hover {
+  background-color: #3E3E3E;
+}
