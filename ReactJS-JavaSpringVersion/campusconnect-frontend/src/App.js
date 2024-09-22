@@ -21,6 +21,7 @@
 
 import React, { useState } from 'react';
 import ProfilePage from './components/ProfilePage';
+import RegistrationPage from './components/RegistrationPage';
 //import Chat from './components/Chat';
 import './App.css';
 
@@ -34,6 +35,12 @@ function App() {
 
   const openSettingsModal = () => setSettingsModalOpen(true);
   const closeSettingsModal = () => setSettingsModalOpen(false);
+
+  return (
+     <div className="App">
+        <RegistrationPage />
+     </div>
+  );
 
   return (
     <div className="App">
