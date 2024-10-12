@@ -1,63 +1,76 @@
-// import React, { useEffect, useState, useRef } from 'react';
-// import { Client } from '@stomp/stompjs';
-// import SockJS from 'sockjs-client';
+import React, { useState, useEffect } from 'react';
+import './Chat.css'; // Import your CSS file for styling
 
-// function Chat() {
-//   const [messages, setMessages] = useState([]);
-//   const stompClientRef = useRef(null); // Use useRef to store the stompClient
+const Chat = () => {
+    const [messages, setMessages] = useState([]);
+    const [message, setMessage] = useState('');
+    const senderId = 1; // Replace with dynamic senderId based on your app
+    const recipientId = 2; // Replace with dynamic recipientId based on your app
 
-//   useEffect(() => {
-//     const socket = new SockJS('http://localhost:8080/ws');
-    
-//     stompClientRef.current = new Client({
-//       webSocketFactory: () => socket,
-//       onConnect: (frame) => {
-//         console.log('Connected: ' + frame);
-//         stompClientRef.current.subscribe('/topic/messages', (message) => {
-//           setMessages((prevMessages) => [...prevMessages, message.body]);
-//         });
-//       },
-//       onStompError: (frame) => {
-//         console.error('Broker reported error: ' + frame.headers['message']);
-//         console.error('Additional details: ' + frame.body);
-//       },
-//     });
+    useEffect(() => {
+        fetchMessages();
+    }, []);
 
-//     stompClientRef.current.activate();
+    const fetchMessages = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/chat/messages/all`);
+            const data = await response.json();
+            setMessages(data);
+        } catch (error) {
+            console.error('Error fetching messages:', error);
+        }
+    };
 
-//     // Cleanup on component unmount
-//     return () => {
-//       if (stompClientRef.current) {
-//         stompClientRef.current.deactivate();
-//       }
-//     };
-//   }, []); // Empty dependency array ensures useEffect only runs on mount
+    const sendMessage = async () => {
+        if (message.trim()) {
+            const newMessage = {
+                senderId: senderId,
+                recipientId: recipientId,
+                message: message,
+                timestamp: new Date().toISOString() // Add timestamp if needed
+            };
 
-//   return (
-//     <div>
-//       <h2>Chat Messages</h2>
-//       <ul>
-//         {messages.map((msg, idx) => (
-//           <li key={idx}>{msg}</li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }
+            try {
+                const response = await fetch('http://localhost:8080/api/chat/send', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(newMessage),
+                });
+                if (response.ok) {
+                    setMessage('');
+                    fetchMessages(); // Refresh the messages after sending
+                } else {
+                    console.error('Error sending message:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error sending message:', error);
+            }
+        }
+    };
 
-// export default Chat;
-
-import React from 'react';
-import './Chat.css';
-
-function Chat() {
-  return (
-    <div className="chat-window">
-      <h2>Chat Conversations</h2>
-      <p>Select a conversation or start a new one</p>
-      {/* Additional chat functionality here */}
-    </div>
-  );
-}
+    return (
+        <div className="chat-container">
+            <div className="messages">
+                {messages.map((msg, index) => (
+                    <div key={index} className={`message ${msg.senderId === senderId ? 'sent' : 'received'}`}>
+                        <span>{msg.message}</span>
+                        <span className="timestamp">{new Date(msg.timestamp).toLocaleString()}</span>
+                    </div>
+                ))}
+            </div>
+            <div className="input-container">
+                <input
+                    type="text"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Type your message..."
+                />
+                <button onClick={sendMessage}>Send</button>
+            </div>
+        </div>
+    );
+};
 
 export default Chat;
