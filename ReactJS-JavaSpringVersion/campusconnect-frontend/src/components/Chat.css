@@ -12,7 +12,7 @@
 .messages {
   flex: 1;
   padding: 10px;
-  background-color: #f9f9f9;
+  background-color: #0d0d0d;
   overflow-y: auto;
   max-height: 400px; /* Limit height for scrolling */
 }
@@ -25,18 +25,18 @@
 }
 
 .sent {
-  background-color: #d1e7dd;
+  background-color: #007bff;
   align-self: flex-end;
 }
 
 .received {
-  background-color: #f8d7da;
+  background-color: #008444;
   align-self: flex-start;
 }
 
 .timestamp {
   font-size: 0.8em;
-  color: #888;
+  color: #ccc;
   position: absolute;
   bottom: 5px;
   right: 10px;
@@ -45,7 +45,7 @@
 .input-container {
   display: flex;
   padding: 10px;
-  background-color: #fff;
+  background-color: #0d0d0d;
   border-top: 1px solid #ccc;
 }
 
