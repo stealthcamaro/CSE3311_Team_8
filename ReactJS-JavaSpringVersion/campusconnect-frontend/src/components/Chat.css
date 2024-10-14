@@ -2,11 +2,12 @@
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
-  border: 1px solid #ccc;
+  border: 1px solid #000000;
   border-radius: 5px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  padding-bottom: 80px; /* Adjust the padding to create space for the buttons */
 }
 
 .messages {
@@ -46,19 +47,22 @@
   display: flex;
   padding: 10px;
   background-color: #0d0d0d;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #131313;
 }
 
 input {
   flex: 1;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #007bff;
   border-radius: 5px;
   margin-right: 10px;
+  background-color: #0d0d0d;
+  color: white;
 }
 
 button {
   padding: 10px 20px;
+  width: 100px;
   border: none;
   border-radius: 5px;
   background-color: #007bff;

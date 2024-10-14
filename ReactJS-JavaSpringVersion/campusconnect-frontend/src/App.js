@@ -68,10 +68,10 @@
 // src/App.js
 
 import React, { useState } from 'react';
-import ProfilePage from './components/ProfilePage';
+import ProfilePage from './components/ProfilePage'; // Main Profile page / Feed component
 import RegistrationPage from './components/RegistrationPage';
-import Chat from './components/Chat';
-import Header from './components/Header';
+import Chat from './components/Chat'; //Chat feature
+import Header from './components/Header'; // CampusConnect Logo
 import PostComponent from './components/Post'; // Import PostComponent
 import './App.css';
 
