@@ -10,28 +10,16 @@ Make sure you have the following installed on your machine:
 - **Node.js** (v16 or higher) and **npm** for the React frontend.
 - **Java** (JDK 17 or higher) for the Spring Boot backend.
 - **Maven** for managing dependencies in the Java Spring project.
-- **PostgreSQL** (if you're using it as the database).
 
 ### 1. Cloning the Project
 First, clone the repository:
-```bash
+
 git clone https://github.com/stealthcamaro/CSE3311_Team_8.git
 cd CSE3311_Team_8/ReactJS-JavaSpringVersion
 
 ### 2. Running the Java Spring Backend
 Step 1: Navigate to Backend Directory
 Go to the Java Spring backend directory:
-
-
-cd ../CampusConnect
-Step 2: Set Up Database (PostgreSQL)
-Make sure PostgreSQL is installed and running. Create a database and update the connection details in src/main/resources/application.properties:
-
-properties
-
-spring.datasource.url=jdbc:postgresql://localhost:5432/campusconnect
-spring.datasource.username=your-username
-spring.datasource.password=your-password
 
 Step 3: Build and Run the Spring Boot App
 Use Maven to build and run the project:
