@@ -15,7 +15,7 @@
   display: flex;
   justify-content: space-evenly;
   background-color: #1A1A1A; /* dark gray for contrast */
-  padding: 10px;
+  padding-bottom: 20px;
 }
 
 .bar-button {
@@ -28,7 +28,7 @@
 }
 
 .bar-button:hover {
-  background-color: #3E3E3E;
+  background-color: #0064B1;
 }
 
 /* Ensures the whole page remains black with no white space */
