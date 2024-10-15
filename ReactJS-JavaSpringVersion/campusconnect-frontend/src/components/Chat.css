@@ -7,7 +7,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding-bottom: 80px; /* Adjust the padding to create space for the buttons */
+  padding-bottom: 10px; /* Adjust the padding to create space for the buttons */
 }
 
 .messages {
@@ -48,6 +48,7 @@
   padding: 10px;
   background-color: #0d0d0d;
   border-top: 1px solid #131313;
+  padding-bottom: 15%;
 }
 
 input {

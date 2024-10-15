@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Entity
 @Table(name = "posts")
@@ -22,8 +24,11 @@ public class Post {
     @Column(name = "image_url")
     private String imageUrl; // Optional image URL for the post
 
+//    @Column(name = "created_at", columnDefinition = "TIMESTAMPTZ")
+//    private OffsetDateTime createdAt; // Timestamp when the post was created
     @Column(name = "created_at", columnDefinition = "TIMESTAMPTZ")
-    private OffsetDateTime createdAt; // Timestamp when the post was created
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+    private OffsetDateTime createdAt;
 
     @Column(name = "updated_at", columnDefinition = "TIMESTAMPTZ")
     private OffsetDateTime updatedAt; // Timestamp when the post was last updated
