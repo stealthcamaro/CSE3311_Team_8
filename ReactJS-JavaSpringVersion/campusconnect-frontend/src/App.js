@@ -78,6 +78,7 @@ function App() {
   const [isPostModalOpen, setPostModalOpen] = useState(false);
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
   const [isChatVisible, setChatVisible] = useState(false); // State for chat visibility
+  const [isLoggedOut, setIsLoggedOut] = useState(false); // State to check if user has logged out
 
   const openPostModal = () => setPostModalOpen(true);
   const closePostModal = () => setPostModalOpen(false);
@@ -86,6 +87,17 @@ function App() {
   const closeSettingsModal = () => setSettingsModalOpen(false);
 
   const toggleChat = () => setChatVisible(!isChatVisible); // Toggle chat visibility
+
+  // Function to handle logout
+  const handleLogOut = () => {
+    // Simply set the state to show the RegistrationPage (login page)
+    setIsLoggedOut(true);
+  };
+
+  // If the user has logged out, render the RegistrationPage
+  if (isLoggedOut) {
+    return <RegistrationPage />;
+  }
 
   return (
     <div className="App">
@@ -113,7 +125,9 @@ function App() {
           <div className="modal-content">
             <h2>Settings</h2>
             <p>Settings content here...</p>
+            <button onClick={handleLogOut}>Logout</button> {/* Log Out button */}
             <button onClick={closeSettingsModal}>Close</button>
+            
           </div>
         </div>
       )}
