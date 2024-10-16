@@ -1,21 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './RegistrationPage.css';
-import OtpVerificationPage from './OtpVerificationPage';
 
 const RegistrationPage = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [isRegistered, setIsRegistered] = useState(false);
-    const [otpSent, setOtpSent] = useState(false);
-
-    const sendOtpToEmail = () => {
-        // Simulating API call to send OTP
-        console.log('Sending OTP to:', email);
-        setOtpSent(true);
-        // Here, you would typically call your backend API
-    };
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -32,14 +24,15 @@ const RegistrationPage = () => {
             return;
         }
 
+        // Reset error message if validation passes
         setErrorMessage('');
-        setIsRegistered(true);
-        sendOtpToEmail();
-    };
 
-    if (isRegistered && otpSent) {
-        return <OtpVerificationPage email={email} />;
-    }
+        // Navigate to additional registration page with email and password
+        navigate({
+            pathname: '/additional-registration',
+            state: { email, password } // Pass email and password
+        });
+    };
 
     return (
         <div className="registration-page">
@@ -72,9 +65,13 @@ const RegistrationPage = () => {
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         required
                     />
+
                     <button type="submit">Register</button>
+                    <div className="login-link">
+                       <p>Already have an account?</p>
+                       <a onClick={() => navigate('/login')} href="#!">Login here</a> {/* Link to Login Page */}
+                    </div>
                 </form>
-                {otpSent && <div className="otp-sent-message">OTP sent to your email!</div>}
             </div>
         </div>
     );

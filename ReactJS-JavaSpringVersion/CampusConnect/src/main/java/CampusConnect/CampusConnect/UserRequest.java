@@ -1,20 +1,8 @@
 package CampusConnect.CampusConnect;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "users")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class UserRequest {
     private String email;
-    private String password; // Raw password, no encryption initially
+    private String password;
     private String mavID; // Updated field name
     private String firstName; // Updated field name
     private String lastName; // Updated field name
@@ -23,14 +11,6 @@ public class User {
     private String graduationYear; // Updated field name
 
     // Getters and setters
-    // (Same as before, but include the new field names)
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return email;
