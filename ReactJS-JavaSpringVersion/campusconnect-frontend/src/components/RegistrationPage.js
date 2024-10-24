@@ -1,56 +1,51 @@
 import React, { useState } from 'react';
-import './RegistrationPage.css';
-import OtpVerificationPage from './OtpVerificationPage';
+import { useNavigate } from 'react-router-dom';
+import './RegistrationPage.css';  // Styling file
 
 const RegistrationPage = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [isRegistered, setIsRegistered] = useState(false);
-    const [otpSent, setOtpSent] = useState(false);
 
-    const sendOtpToEmail = () => {
-        // Simulating API call to send OTP
-        console.log('Sending OTP to:', email);
-        setOtpSent(true);
-        // Here, you would typically call your backend API
-    };
-
-    const handleRegister = (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault();
 
-        const utaEmailRegex = /^[a-zA-Z0-9._%+-]+@(mavs\.uta\.edu|uta\.edu)$/;
-
-        if (!utaEmailRegex.test(email)) {
-            setErrorMessage('Email must contain "@mavs.uta.edu" or "@uta.edu"');
+        // Validate school email domain
+        const schoolDomain = '@school.edu';
+        if (!email.endsWith(schoolDomain)) {
+            setErrorMessage('Email must be from the school domain');
             return;
         }
 
-        if (password !== confirmPassword) {
-            setErrorMessage('Passwords do not match');
-            return;
-        }
+        try {
+            const response = await fetch('http://localhost:8080/api/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password, firstName, lastName }),
+            });
 
-        setErrorMessage('');
-        setIsRegistered(true);
-        sendOtpToEmail();
+            if (response.ok) {
+                // Registration successful, redirect to login
+                navigate('/login');
+            } else {
+                setErrorMessage('Registration failed. Please try again.');
+            }
+        } catch (error) {
+            setErrorMessage('An error occurred during registration');
+        }
     };
-
-    if (isRegistered && otpSent) {
-        return <OtpVerificationPage email={email} />;
-    }
 
     return (
         <div className="registration-page">
             <div className="form-container">
                 <h1>Register</h1>
-                <form className="registration-body" onSubmit={handleRegister}>
-                    {errorMessage && (
-                        <div className="error-message" role="alert">
-                            {errorMessage}
-                        </div>
-                    )}
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
+                <form onSubmit={handleRegister}>
                     <input
                         type="email"
                         placeholder="Email"
@@ -66,15 +61,21 @@ const RegistrationPage = () => {
                         required
                     />
                     <input
-                        type="password"
-                        placeholder="Confirm Password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        type="text"
+                        placeholder="First Name"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="Last Name"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
                         required
                     />
                     <button type="submit">Register</button>
                 </form>
-                {otpSent && <div className="otp-sent-message">OTP sent to your email!</div>}
             </div>
         </div>
     );
