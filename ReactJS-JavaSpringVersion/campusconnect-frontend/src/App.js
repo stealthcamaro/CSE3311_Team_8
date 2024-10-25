@@ -66,6 +66,7 @@
 import React, { useState } from 'react';
 import ProfilePage from './components/ProfilePage'; // Main Profile page / Feed component
 import RegistrationPage from './components/RegistrationPage'; // Import RegistrationPage
+import LoginPage from './components/LoginPage';
 import Chat from './components/Chat'; // Chat feature
 import Header from './components/Header'; // CampusConnect Logo
 import PostComponent from './components/Post'; // Import PostComponent
@@ -96,6 +97,7 @@ function App() {
                     <Route path="/" element={<ProfilePage />} />
                     {/* Registration Page */}
                     <Route path="/register" element={<RegistrationPage />} />
+                    <Route path="/login" element={<LoginPage />} />
                 </Routes>
 
                 {/* Post Modal */}

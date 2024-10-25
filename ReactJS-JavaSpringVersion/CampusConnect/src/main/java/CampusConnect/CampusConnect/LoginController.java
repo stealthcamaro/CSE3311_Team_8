@@ -42,7 +42,7 @@ public class LoginController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest registerRequest) {
-        if (!registerRequest.getEmail().endsWith("@school.edu")) {
+        if (!registerRequest.getEmail().endsWith("@mavs.uta.edu")) {
             return ResponseEntity.badRequest().body("Email must be from the school domain");
         }
 

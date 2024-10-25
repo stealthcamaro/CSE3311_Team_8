@@ -4,17 +4,23 @@ import './RegistrationPage.css';  // Styling file
 
 const RegistrationPage = () => {
     const navigate = useNavigate();
+
+    // Add state for all required fields
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [mavid, setMavid] = useState('');  // New
+    const [college, setCollege] = useState('');  // New
+    const [major, setMajor] = useState('');  // New
+    const [gradyear, setGradyear] = useState('');  // New
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleRegister = async (e) => {
         e.preventDefault();
 
         // Validate school email domain
-        const schoolDomain = '@school.edu';
+        const schoolDomain = '@mavs.uta.edu';
         if (!email.endsWith(schoolDomain)) {
             setErrorMessage('Email must be from the school domain');
             return;
@@ -26,7 +32,17 @@ const RegistrationPage = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password, firstName, lastName }),
+                // Include all required fields in the request body
+                body: JSON.stringify({ 
+                    email, 
+                    password, 
+                    mavid, 
+                    college, 
+                    major, 
+                    gradyear, 
+                    firstName, 
+                    lastName 
+                }),
             });
 
             if (response.ok) {
@@ -72,6 +88,34 @@ const RegistrationPage = () => {
                         placeholder="Last Name"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="Mav ID"
+                        value={mavid}
+                        onChange={(e) => setMavid(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="College"
+                        value={college}
+                        onChange={(e) => setCollege(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="Major"
+                        value={major}
+                        onChange={(e) => setMajor(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="Graduation Year"
+                        value={gradyear}
+                        onChange={(e) => setGradyear(e.target.value)}
                         required
                     />
                     <button type="submit">Register</button>

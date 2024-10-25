@@ -21,6 +21,10 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
+        user.setMavid(request.getMavid());
+        user.setCollege(request.getCollege());
+        user.setMajor(request.getMajor());
+        user.setGradyear(request.getGradyear());
 
         userRepository.save(user);
     }
