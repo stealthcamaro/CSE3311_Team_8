@@ -21,7 +21,7 @@ const LoginPage = () => {
         setErrorMessage('');
 
         // Redirect to profile or any other page after successful login
-        navigate('/profile');
+        navigate('/');
     };
 
     return (
@@ -52,7 +52,7 @@ const LoginPage = () => {
                 </form>
                 <div className="registration-link">
                     <p>Don't have an account?</p>
-                    <a onClick={() => navigate('/')} href="#!">Register here</a> {/* Link to Registration Page */}
+                    <a onClick={() => navigate('/register')} href="#!">Register here</a> {/* Link to Registration Page */}
                 </div>
             </div>
         </div>
