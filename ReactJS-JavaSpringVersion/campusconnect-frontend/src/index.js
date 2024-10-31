@@ -30,12 +30,18 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} /> {/* Main App */}
-        <Route path="/login" element={<LoginPage />} /> {/* Login Page */}
-        <Route path="/register" element={<RegistrationPage />} /> {/* Registration Page */}
+        <Route path="/" element={<App />} />
+        {' '}
+        {/* Main App */}
+        <Route path="/login" element={<LoginPage />} />
+        {' '}
+        {/* Login Page */}
+        <Route path="/register" element={<RegistrationPage />} />
+        {' '}
+        {/* Registration Page */}
       </Routes>
     </BrowserRouter>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 reportWebVitals();
