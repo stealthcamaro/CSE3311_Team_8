@@ -1,139 +1,72 @@
-// import React, { useState } from 'react';
-// import ProfilePage from './components/ProfilePage'; // Main Profile page / Feed component
-// // import RegistrationPage from './components/RegistrationPage';
-// import Chat from './components/Chat'; //Chat feature
-// import Header from './components/Header'; // CampusConnect Logo
-// import PostComponent from './components/Post'; // Import PostComponent
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// import './App.css';
-
-// function App() {
-//     const [isPostModalOpen, setPostModalOpen] = useState(false);
-//     const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
-//     const [isChatVisible, setChatVisible] = useState(false);
-
-//     const openPostModal = () => setPostModalOpen(true);
-//     const closePostModal = () => setPostModalOpen(false);
-    
-//     const openSettingsModal = () => setSettingsModalOpen(true);
-//     const closeSettingsModal = () => setSettingsModalOpen(false);
-
-//     const toggleChat = () => setChatVisible(!isChatVisible);
-
-//     return (
-//         <div className="App">
-//             <Header />
-//             <ProfilePage />
-
-//             {/* Post Modal */}
-//             {isPostModalOpen && (
-//                 <div className="modal">
-//                     <div className="modal-content">
-//                         <h2>Create a Post</h2>
-//                         <PostComponent onClose={closePostModal} /> {/* Pass onClose here */}
-//                         <button type="button" onClick={closePostModal}>Close</button>
-//                     </div>
-//                 </div>
-//             )}
-
-//             {/* Settings Modal */}
-//             {isSettingsModalOpen && (
-//                 <div className="modal">
-//                     <div className="modal-content">
-//                         <h2>Settings</h2>
-//                         <p>Settings content here...</p>
-//                         <button onClick={closeSettingsModal}>Close</button>
-//                     </div>
-//                 </div>
-//             )}
-
-//             {/* Chat Component */}
-//             {isChatVisible && <Chat />}
-
-//             <div className="bottom-bar">
-//                 <button className="bar-button" id="post-button" onClick={openPostModal}>Post</button>
-//                 <button className="bar-button" id="connect-button">Connect</button>
-//                 <button className="bar-button" id="chat-button" onClick={toggleChat}>Chat</button>
-//                 <button className="bar-button" id="settings-button" onClick={openSettingsModal}>Settings</button>
-//             </div>
-//         </div>
-//     );
-// }
-
-// export default App;
-
-
 import React, { useState } from 'react';
-import ProfilePage from './components/ProfilePage'; // Main Profile page / Feed component
-import RegistrationPage from './components/RegistrationPage'; // Import RegistrationPage
-import LoginPage from './components/LoginPage';
-import Chat from './components/Chat'; // Chat feature
-import Header from './components/Header'; // CampusConnect Logo
-import PostComponent from './components/Post'; // Import PostComponent
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import ProfilePage from './components/ProfilePage';
+import Chat from './components/Chat';
+import Header from './components/Header';
+import PostComponent from './components/Post';
 import './App.css';
 
 function App() {
-    const [isPostModalOpen, setPostModalOpen] = useState(false);
-    const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
-    const [isChatVisible, setChatVisible] = useState(false);
+  const [isPostModalOpen, setPostModalOpen] = useState(false);
+  const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
+  const [isChatVisible, setChatVisible] = useState(false);
+  const navigate = useNavigate();
 
-    const openPostModal = () => setPostModalOpen(true);
-    const closePostModal = () => setPostModalOpen(false);
-    
-    const openSettingsModal = () => setSettingsModalOpen(true);
-    const closeSettingsModal = () => setSettingsModalOpen(false);
+  const openPostModal = () => setPostModalOpen(true);
+  const closePostModal = () => setPostModalOpen(false);
 
-    const toggleChat = () => setChatVisible(!isChatVisible);
+  const openSettingsModal = () => setSettingsModalOpen(true);
+  const closeSettingsModal = () => setSettingsModalOpen(false);
 
-    return (
-        <Router>
-            <div className="App">
-                <Header />
-                
-                {/* Define Routes */}
-                <Routes>
-                    {/* Default to ProfilePage for now */}
-                    <Route path="/" element={<ProfilePage />} />
-                    {/* Registration Page */}
-                    <Route path="/register" element={<RegistrationPage />} />
-                    <Route path="/login" element={<LoginPage />} />
-                </Routes>
+  const toggleChat = () => setChatVisible(!isChatVisible);
 
-                {/* Post Modal */}
-                {isPostModalOpen && (
-                    <div className="modal">
-                        <div className="modal-content">
-                            <h2>Create a Post</h2>
-                            <PostComponent onClose={closePostModal} /> {/* Pass onClose here */}
-                            <button type="button" onClick={closePostModal}>Close</button>
-                        </div>
-                    </div>
-                )}
+  // Function to handle logout
+  const handleLogOut = () => {
+    // Log out logic (optional)
+    navigate('/login'); // Redirect to login page
+  };
 
-                {/* Settings Modal */}
-                {isSettingsModalOpen && (
-                    <div className="modal">
-                        <div className="modal-content">
-                            <h2>Settings</h2>
-                            <p>Settings content here...</p>
-                            <button onClick={closeSettingsModal}>Close</button>
-                        </div>
-                    </div>
-                )}
+  return (
+    <div className="App">
+      <Header />
+      <ProfilePage />
 
-                {/* Chat Component */}
-                {isChatVisible && <Chat />}
+      {/* Post Modal */}
+      {isPostModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>Create a Post</h2>
+            <PostComponent onClose={closePostModal} />
+            <button type="button" onClick={closePostModal}>Close</button>
+          </div>
+        </div>
+      )}
 
-                <div className="bottom-bar">
-                    <button className="bar-button" id="post-button" onClick={openPostModal}>Post</button>
-                    <button className="bar-button" id="connect-button">Connect</button>
-                    <button className="bar-button" id="chat-button" onClick={toggleChat}>Chat</button>
-                    <button className="bar-button" id="settings-button" onClick={openSettingsModal}>Settings</button>
-                </div>
-            </div>
-        </Router>
-    );
+      {/* Settings Modal */}
+      {isSettingsModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>Settings</h2>
+            <p>Settings content here...</p>
+            <button onClick={handleLogOut}>Logout</button>
+            {' '}
+            {/* Log Out button */}
+            <button onClick={closeSettingsModal}>Close</button>
+          </div>
+        </div>
+      )}
+
+      {/* Chat Component */}
+      {isChatVisible && <Chat />}
+
+      <div className="bottom-bar">
+        <button className="bar-button" id="post-button" onClick={openPostModal}>Post</button>
+        <button className="bar-button" id="connect-button">Connect</button>
+        <button className="bar-button" id="chat-button" onClick={toggleChat}>Chat</button>
+        <button className="bar-button" id="settings-button" onClick={openSettingsModal}>Settings</button>
+      </div>
+    </div>
+  );
 }
 
 export default App;

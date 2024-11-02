@@ -1,0 +1,146 @@
+/* Overall page styling */
+.additional-registration-page {
+    padding: 20px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    background-color: #0d0d0d; /* Space Black background */
+    color: #f0f0f0; /* Light text for contrast */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    max-width: 400px; /* To centralize the page */
+}
+
+/* Form container (the box around the form fields) */
+.form-container {
+    background-color: #1a1a1a; /* Dark background for the form */
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #333; /* Subtle border around the box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    max-width: 350px; /* Set the width of the form box */
+    margin: 0 auto; /* Center the form box */
+}
+
+/* Form header */
+.registration-header {
+    text-align: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.registration-header h1 {
+    margin: 0;
+    color: #e0e0e0; /* Slightly softer white */
+}
+
+/* Form body */
+.registration-body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Input field styling */
+input[type="text"], input[type="number"] {
+    width: 100%; /* Full width of the form box */
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #1a1a1a; /* Dark background for input fields */
+    color: #f0f0f0; /* White text inside the input boxes */
+    border: 1px solid #333; /* Subtle border */
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* Placeholder text */
+input::placeholder {
+    color: #b0b0b0; /* Grayish text for placeholders */
+}
+
+/* Button styling */
+button {
+    padding: 10px;
+    margin-top: 20px;
+    width: 100%; /* Full width of the form box */
+    background-color: #0064B1; /* Blue button */
+    color: #f0f0f0; /* White text */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Hover effect for buttons */
+button:hover {
+    background-color: #0080FF; /* Slightly lighter blue on hover */
+}
+
+/* Link styling */
+a {
+    color: #0064B1; /* Blue for links */
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+}
+
+a:hover {
+    color: #0080FF; /* Lighter blue on hover */
+}
+
+/* Error message styling */
+.error-message {
+    color: #ff4d4d; /* Red color for error messages */
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Success message styling */
+.success-message {
+    color: #00ff00; /* Green color for success messages */
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Dropdown menu styling */
+select {
+    width: 100%; /* Full width of the form box */
+    padding: 10px; /* Same padding as input fields */
+    margin: 10px 0; /* Same margin as input fields */
+    background-color: #1a1a1a; /* Dark background for dropdown */
+    color: #f0f0f0; /* White text inside the dropdown */
+    border: 1px solid #333; /* Subtle border */
+    border-radius: 8px; /* Same border radius as input fields */
+    font-size: 16px; /* Same font size as input fields */
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+/* Placeholder styling for select (optional, if you're using options without a value) */
+select option {
+    background-color: #1a1a1a; /* Match the dropdown's background */
+    color: #f0f0f0; /* Match the text color */
+}
+
+/* Ensure the select dropdown does not have default arrow styling */
+select::-ms-expand {
+    display: none; /* Hides the default dropdown arrow in IE */
+}
+
+/* Optional: Custom arrow styling */
+.select-arrow {
+    position: relative;
+}
+
+.select-arrow::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    border: solid transparent;
+    border-width: 5px 5px 0;
+    border-top-color: #f0f0f0; /* Arrow color */
+    pointer-events: none; /* Make sure the arrow doesn't block clicks */
+}
