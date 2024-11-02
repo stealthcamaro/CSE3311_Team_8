@@ -4,90 +4,127 @@ import './RegistrationPage.css';
 
 function RegistrationPage() {
   const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [mavid, setMavid] = useState('');  // New
+  const [college, setCollege] = useState('');  // New
+  const [major, setMajor] = useState('');  // New
+  const [gradyear, setGradyear] = useState('');  // New
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
 
-    // const utaEmailRegex = /^[a-zA-Z0-9._%+-]+@(mavs\.uta\.edu|uta\.edu)$/;
-
-    // if (!utaEmailRegex.test(email)) {
-    //     setErrorMessage('Email must contain "@mavs.uta.edu" or "@uta.edu"');
-    //     return;
-    // }
-
-    // if (password !== confirmPassword) {
-    //     setErrorMessage('Passwords do not match');
-    //     return;
-    // }
-
-    // // Reset error message if validation passes
-    // setErrorMessage('');
-
-    // // Navigate to additional registration page with email and password
-    // navigate({
-    //     pathname: '/additional-registration',
-    //     state: { email, password } // Pass email and password
-    // });
-
-    // Here, you can add your login logic (API call, etc.)
-    if (email === '' || password === '') {
-      setErrorMessage('Please fill in all fields');
+    //validate school email
+    const schoolDomain = '@mavs.uta.edu';
+    if (!email.endsWith(schoolDomain)) {
+      setErrorMessage('Email must be from the school domain');
       return;
     }
 
+    try {
+      const response = await fetch('http://localhost:8080/api/auth/register', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+      },
+        // Include all required fields in the request body
+        body: JSON.stringify({ 
+            email, 
+            password, 
+            mavid, 
+            college, 
+            major, 
+            gradyear, 
+            firstName, 
+            lastName 
+        }),
+    });
+    
     // Reset error message if validation passes
     setErrorMessage('');
 
-    // Redirect to profile or any other page after successful login
-    navigate('/login');
-  };
+    if (response.ok) {
+          // Registration successful, redirect to login
+          navigate('/login');
+    } else {
+          setErrorMessage('Registration failed. Please try again.');
+    }
 
+    } catch (error) {
+      setErrorMessage('An error occurred during registration');
+    }
+
+  };
   return (
     <div className="registration-page">
-      <div className="form-container">
-        <h1>Register</h1>
-        <form className="registration-body" onSubmit={handleRegister}>
-          {errorMessage && (
-            <div className="error-message" role="alert">
-              {errorMessage}
+            <div className="form-container">
+                <h1>Register</h1>
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
+                <form onSubmit={handleRegister}>
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="First Name"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="Last Name"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="Mav ID"
+                        value={mavid}
+                        onChange={(e) => setMavid(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="College"
+                        value={college}
+                        onChange={(e) => setCollege(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="Major"
+                        value={major}
+                        onChange={(e) => setMajor(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="Graduation Year"
+                        value={gradyear}
+                        onChange={(e) => setGradyear(e.target.value)}
+                        required
+                    />
+                    <button type="submit">Register</button>
+                </form>
             </div>
-          )}
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-
-          <button type="submit">Register</button>
-          <div className="login-link">
-            <p>Already have an account?</p>
-            <a onClick={() => navigate('/login')} href="#!">Login here</a>
-            {' '}
-            {/* Link to Login Page */}
-          </div>
-        </form>
-      </div>
-    </div>
+        </div>
   );
 }
 

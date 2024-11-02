@@ -1,39 +1,31 @@
 package CampusConnect.CampusConnect;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    // Constructor-based injection
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
-    public User registerUser(String email, String password, String mavID, String firstName, String lastName, String college, String major, String graduationYear) {
-        // Check if the user already exists
-        if (userRepository.findByEmail(email) != null) {
-            throw new RuntimeException("User already exists with this email: " + email);
-        }
-
-        // Encrypt the password before saving
-        String encryptedPassword = passwordEncoder.encode(password);
-
-        // Create a new User object
+    public void registerUser(RegisterRequest request) {
         User user = new User();
-        user.setEmail(email);
-        user.setPassword(encryptedPassword); // Store encrypted password
-        user.setMavID(mavID);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setCollege(college);
-        user.setMajor(major);
-        user.setGraduationYear(graduationYear);
+        user.setEmail(request.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
+        user.setMavid(request.getMavid());
+        user.setCollege(request.getCollege());
+        user.setMajor(request.getMajor());
+        user.setGradyear(request.getGradyear());
 
-        // Save user to the database
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 }
