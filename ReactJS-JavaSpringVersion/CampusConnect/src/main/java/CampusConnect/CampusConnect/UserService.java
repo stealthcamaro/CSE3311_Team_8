@@ -18,7 +18,7 @@ public class UserService {
     public void registerUser(RegisterRequest request) {
         User user = new User();
         user.setEmail(request.getEmail());
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setPassword(request.getPassword());
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
         user.setMavid(request.getMavid());
