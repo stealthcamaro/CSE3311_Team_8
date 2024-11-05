@@ -26,18 +26,30 @@ public class LoginController {
         this.userService = userService;
     }
 
+
+    //needs to grab the credentials email, password  -> held within the LoginRequest
+
+
+    //needs to verify these credentials match with someone on the database -> 
+        //possible solutions 
+        // userService
+            //regusterRequest
+
+
+    //needs return a "ok" response to the front end -> use 'return ResponseEntity.ok().n=body(Body: "login Scuccesfull")'
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        try {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
-
-            // If authentication is successful, proceed
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            return ResponseEntity.ok().body("Login successful");
-        } catch (AuthenticationException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        if (!loginRequest.getEmail().endsWith("@mavs.uta.edu")) {
+            return ResponseEntity.badRequest().body("Email must be from the school domain");
         }
+
+        if(userService.loginUser(loginRequest)){
+            return ResponseEntity.ok().body("Login successful"); 
+        } /// returns an exception when a failure is reached
+        else{
+            return ResponseEntity.badRequest().body("Login failure");
+        }
+        
     }
 
     @PostMapping("/register")
@@ -46,8 +58,9 @@ public class LoginController {
             return ResponseEntity.badRequest().body("Email must be from the school domain");
         }
 
-        userService.registerUser(registerRequest);
-        return ResponseEntity.ok().body("Registration successful");
+        userService.registerUser(registerRequest); /// returns an exception when a failure is reached
+    
+        return ResponseEntity.ok().body("Registration successful"); 
     }
 }
 

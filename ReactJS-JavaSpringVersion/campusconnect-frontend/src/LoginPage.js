@@ -92,14 +92,14 @@ function LoginPage() {
       return;
     }
 
-    const mavid = "1001648877";
-    const college = "eng";
-    const major = "fake";
-    const gradyear = "fake";
-    const firstName = "luis";
-    const lastName = "del";
+    // const mavid = "1001648877";
+    // const college = "eng";
+    // const major = "fake";
+    // const gradyear = "fake";
+    // const firstName = "luis";
+    // const lastName = "del";
     try {
-      const response = await fetch("http://localhost:8080/api/auth/register", {
+      const response = await fetch("http://localhost:8080/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -108,12 +108,12 @@ function LoginPage() {
         body: JSON.stringify({
           email,
           password,
-          mavid,
-          college,
-          major,
-          gradyear,
-          firstName,
-          lastName,
+          // mavid,
+          // college,
+          // major,
+          // gradyear,
+          // firstName,
+          // lastName,
         }),
       });
 
@@ -122,9 +122,10 @@ function LoginPage() {
 
       if (response.ok) {
         // Registration successful, redirect to login
-        setErrorMessage("Login failed. Please try again.");
-      } else {
         navigate("/");
+      } else {
+        setErrorMessage("Login failed. Please try again.");
+        // change this to send credentials to profile page so it can fetch aprropriatley
       }
     } catch (error) {
       setErrorMessage("An error occurred during registration");

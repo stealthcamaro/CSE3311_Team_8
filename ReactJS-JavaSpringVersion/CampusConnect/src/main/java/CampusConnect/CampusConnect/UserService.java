@@ -26,6 +26,30 @@ public class UserService {
         user.setMajor(request.getMajor());
         user.setGradyear(request.getGradyear());
 
-        userRepository.save(user);
+
+        //we know this saves the user 
+            //but we dont how the backend chesk for success/failure
+        userRepository.save(user); //this is were our user gets saved to the database
+
+    }
+
+    public boolean loginUser(LoginRequest request) {
+        User user = userRepository.findByEmail(request.getEmail());
+        
+        // Check if user exists and the passwords match
+        if (user != null && user.getPassword().equals(request.getPassword())) {
+            // by default this doesnt have to do anything 
+                //defualt is set success
+            return true;
+        }
+        else{   //dont login
+            return false;
+        }
+
+        //we need to figure out exactly whats being done by userrepository.save during a failure
+        
+
+        
+        //return false; // Login failed
     }
 }
