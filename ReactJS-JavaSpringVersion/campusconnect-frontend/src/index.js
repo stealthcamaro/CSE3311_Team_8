@@ -6,23 +6,23 @@ import App from './App';
 import LoginPage from './LoginPage';
 import RegistrationPage from './RegistrationPage';
 import './index.css';
+import { UserProvider } from './UserContext'; // Ensure the path is correct
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        {' '}
-        {/* Main App */}
-        <Route path="/login" element={<LoginPage />} />
-        {' '}
-        {/* Login Page */}
-        <Route path="/register" element={<RegistrationPage />} />
-        {' '}
-        {/* Registration Page */}
-      </Routes>
-    </BrowserRouter>
+    <UserProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/Profile" element={<App />} />
+          {/* Main App */}
+          <Route path="/login" element={<LoginPage />} />
+          {/* Login Page */}
+          <Route path="/register" element={<RegistrationPage />} />
+          {/* Registration Page */}
+        </Routes>
+      </BrowserRouter>
+    </UserProvider>
   </React.StrictMode>,
 );
 

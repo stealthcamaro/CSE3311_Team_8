@@ -2,6 +2,7 @@ package CampusConnect.CampusConnect;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,9 +21,10 @@ public class PostController {
         return ResponseEntity.ok(post);
     }
 
-    // Endpoint to get all posts for a user
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Post>> getUserPosts(@PathVariable Long userId) {
+    // Endpoint to get posts for the authenticated user
+    @GetMapping("/user")
+    public ResponseEntity<List<Post>> getUserPosts(Authentication authentication) {
+        Long userId = ((User) authentication.getPrincipal()).getId();
         List<Post> posts = postService.getUserPosts(userId);
         return ResponseEntity.ok(posts);
     }

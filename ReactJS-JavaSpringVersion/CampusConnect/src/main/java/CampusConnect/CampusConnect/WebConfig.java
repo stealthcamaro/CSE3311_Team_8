@@ -9,7 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**") // Allow all API routes
+//        registry.addMapping("/api/**") // Allow all API routes
+            registry.addMapping("/**") // Allow all API routes
                 .allowedOrigins("http://localhost:3000") // Allow requests from your React app
                 .allowedMethods("GET", "POST", "PUT", "DELETE") // Allowed HTTP methods
                 .allowCredentials(true); // Allow credentials if needed

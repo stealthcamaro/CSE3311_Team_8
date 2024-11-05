@@ -1,48 +1,51 @@
-import React, { useState, useEffect } from 'react';
+// ProfilePage.js
+
+import React, { useEffect, useState } from 'react';
+import { useUser } from '../UserContext'; // Use the hook instead
 import axios from 'axios';
 import './ProfilePage.css';
 
 function ProfilePage() {
+  const userId = localStorage.getItem('userId');
+// Use this userId to fetch posts
+
+  // const { userId } = useUser(); // Get userId from the context
+  console.log("Current User ID:", userId); // Check if userId is set correctly
   const [posts, setPosts] = useState([]);
   const userProfilePicture = null;
 
-  // Function to fetch posts from the backend
   const fetchPosts = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/posts/feed'); // Adjust the endpoint if needed
-      setPosts(response.data); // Set the posts in state
+      const response = await axios.get(`http://localhost:8080/api/posts/feed/${userId}`); // Adjusted endpoint to include userId
+      setPosts(response.data);
     } catch (error) {
-      console.error('Error fetching posts:', error); // Handle any errors
+      console.error('Error fetching posts:', error);
     }
   };
 
-  // Function to delete a post
   const handleDeletePost = async (postId) => {
     await axios.delete(`http://localhost:8080/api/posts/${postId}`);
-    fetchPosts(); // Refresh the posts after deletion
+    fetchPosts();
   };
 
-  // Function to handle edit post
   const handleEditPost = async (postId) => {
-    const newContent = prompt('Edit your post:', ''); // Prompt user for new content
+    const newContent = prompt('Edit your post:', '');
     if (newContent) {
-      const postData = { content: newContent }; // Prepare data for update
+      const postData = { content: newContent };
       await axios.put(`http://localhost:8080/api/posts/${postId}`, postData);
-      fetchPosts(); // Refresh the posts after editing
+      fetchPosts();
     }
   };
 
-  // Fetch posts when the component mounts
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [userId]); // Depend on userId to refetch when it changes
 
   return (
     <div className="profile-page">
-      {/* Profile Header */}
       <div className="profile-header">
         <img
-          src={userProfilePicture || '/default-profile.png'} // Default image fallback
+          src={userProfilePicture || '/default-profile.png'}
           alt="Profile"
           className="profile-picture"
         />
@@ -53,11 +56,9 @@ function ProfilePage() {
         </div>
       </div>
 
-      {/* Profile Body */}
       <div className="profile-body">
         <div className="profile-posts">
           <h2>Recent Posts</h2>
-          {/* Display fetched posts dynamically */}
           {posts.length > 0 ? (
             posts.map((post) => (
               <div
@@ -87,7 +88,6 @@ function ProfilePage() {
 
         <div className="profile-connections">
           <h2>Connections</h2>
-          {/* Placeholder for connections */}
           <div className="connection">Alice Johnson</div>
           <div className="connection">Bob Smith</div>
         </div>

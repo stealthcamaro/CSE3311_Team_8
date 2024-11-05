@@ -17,6 +17,11 @@ public class ChatService {
         return chatMessageRepository.save(chatMessage);
     }
 
+    public List<ChatMessage> getMessagesByUserId(Long userId) {
+        // Fetch messages where the user is either the sender or the recipient
+        return chatMessageRepository.findBySenderIdOrRecipientId(userId, userId);
+    }
+
     // Retrieve all chat messages from the database
     public List<ChatMessage> getAllMessages() {
         return chatMessageRepository.findAll();

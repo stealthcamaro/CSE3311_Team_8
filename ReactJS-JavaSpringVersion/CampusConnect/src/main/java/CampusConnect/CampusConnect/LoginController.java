@@ -29,13 +29,23 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+            // Attempt authentication and log the request
+            System.out.println("Attempting login for user: " + loginRequest.getEmail());
+            System.out.println("Email: " + loginRequest.getEmail());
+            System.out.println("Password: " + loginRequest.getPassword());
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
-            // If authentication is successful, proceed
+            // Set the authentication in the SecurityContext
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            return ResponseEntity.ok().body("Login successful");
+
+            // Fetch the authenticated user's details
+            User user = userService.findUserByEmail(loginRequest.getEmail());
+            System.out.println("Login successful for user: " + user.getEmail());
+
+            // Return user details in response (excluding sensitive data like password)
+            return ResponseEntity.ok().body(new UserResponse(user.getId(), user.getEmail(), user.getFirstName(), user.getLastName()));
         } catch (AuthenticationException e) {
+            System.out.println("Login failed for user: " + loginRequest.getEmail() + " - Invalid credentials");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
     }
@@ -50,4 +60,3 @@ public class LoginController {
         return ResponseEntity.ok().body("Registration successful");
     }
 }
-

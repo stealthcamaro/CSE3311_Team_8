@@ -6,6 +6,7 @@ import Header from './components/Header';
 import PostComponent from './components/Post';
 import './App.css';
 
+
 function App() {
   const [isPostModalOpen, setPostModalOpen] = useState(false);
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
