@@ -38,6 +38,10 @@ public class User {
     @Column(name = "gradyear", nullable = false)
     private String gradyear;  // Graduation year field
 
+    @Column(nullable = false)
+    private String bio;
+
+
     // Getters and Setters for all fields
     public Long getId() {
         return id;
@@ -99,8 +103,16 @@ public class User {
         return major;
     }
 
+    public String getBio() {
+        return bio;
+    }
+
     public void setMajor(String major) {
         this.major = major;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     public String getGradyear() {

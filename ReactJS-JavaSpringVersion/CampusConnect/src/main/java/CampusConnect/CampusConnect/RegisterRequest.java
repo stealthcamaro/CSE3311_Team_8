@@ -9,11 +9,12 @@ public class RegisterRequest {
     private String college;
     private String major;
     private String gradyear;
+    private String bio;
 
     // Constructors
     public RegisterRequest() {}
 
-    public RegisterRequest(String email, String password, String firstName, String lastName, String mavid, String college, String major, String gradyear) {
+    public RegisterRequest(String email, String password, String firstName, String lastName, String mavid, String college, String major, String gradyear, String bio) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -21,6 +22,7 @@ public class RegisterRequest {
         this.mavid = mavid;
         this.college = college;
         this.major = major;
+        this.bio = bio;
         this.gradyear = gradyear;
     }
 
@@ -80,6 +82,15 @@ public class RegisterRequest {
     public void setMajor(String major) {
         this.major = major;
     }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio){
+        this.bio = bio;
+    }
+
 
     public String getGradyear() {
         return gradyear;

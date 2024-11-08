@@ -13,7 +13,7 @@ function App() {
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
   const [isChatVisible, setChatVisible] = useState(false);
   //const [email, setEmail] = useState(null); // Add email state
-  const { setEmail } = useContext(AuthContext);
+  const { setEmail, setMajor } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const openPostModal = () => setPostModalOpen(true);
@@ -28,6 +28,7 @@ function App() {
   const handleLogOut = () => {
     // Log out logic (optional)
     setEmail(null);
+    setMajor(null);
     navigate("/login"); // Redirect to login page
   };
 

@@ -42,9 +42,17 @@ public class LoginController {
         if (!loginRequest.getEmail().endsWith("@mavs.uta.edu")) {
             return ResponseEntity.badRequest().body("Email must be from the school domain");
         }
+        User user = userService.loginUser(loginRequest);
+        if(user != null){
+            // send back important data for profile rendering
+            // send back 
+            //major 
+            //Grad year
+            //Biography
+            String m = user.getMajor();
+            System.out.println(m);
 
-        if(userService.loginUser(loginRequest)){
-            return ResponseEntity.ok().body("Login successful"); 
+            return ResponseEntity.ok().body(user); 
         } /// returns an exception when a failure is reached
         else{
             return ResponseEntity.badRequest().body("Login failure");
@@ -62,5 +70,6 @@ public class LoginController {
     
         return ResponseEntity.ok().body("Registration successful"); 
     }
+
 }
 

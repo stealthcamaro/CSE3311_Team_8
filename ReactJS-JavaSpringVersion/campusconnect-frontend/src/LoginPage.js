@@ -6,7 +6,7 @@ import "./LoginPage.css";
 
 function LoginPage() {
   const navigate = useNavigate();
-  const { setEmail } = useContext(AuthContext);
+  const { setEmail, setMajor, setGradyear, setBio } = useContext(AuthContext);
 
   const [email, setEmailInput] = useState("");
   const [password, setPassword] = useState("");
@@ -40,7 +40,12 @@ function LoginPage() {
 
       if (response.ok) {
         // Registration successful,
+        //const m = await response.text();
+        const data = await response.json();
         setEmail(email);
+        setMajor(data.major);
+        setGradyear(data.gradyear);
+        setBio(data.bio);
 
         //redirect to login
         //setTimeout(() => navigate("/"), 0);
@@ -50,7 +55,7 @@ function LoginPage() {
         // change this to send credentials to profile page so it can fetch aprropriatley
       }
     } catch (error) {
-      setErrorMessage("An error occurred during registration");
+      setErrorMessage("An error occurred during login");
     }
   };
   return (

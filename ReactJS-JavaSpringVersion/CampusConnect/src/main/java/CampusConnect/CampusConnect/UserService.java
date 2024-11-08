@@ -24,6 +24,7 @@ public class UserService {
         user.setMavid(request.getMavid());
         user.setCollege(request.getCollege());
         user.setMajor(request.getMajor());
+        user.setBio(request.getBio());
         user.setGradyear(request.getGradyear());
 
 
@@ -33,17 +34,17 @@ public class UserService {
 
     }
 
-    public boolean loginUser(LoginRequest request) {
+    public User loginUser(LoginRequest request) {
         User user = userRepository.findByEmail(request.getEmail());
         
         // Check if user exists and the passwords match
         if (user != null && user.getPassword().equals(request.getPassword())) {
             // by default this doesnt have to do anything 
                 //defualt is set success
-            return true;
+            return user;
         }
         else{   //dont login
-            return false;
+            return null;
         }
 
         //we need to figure out exactly whats being done by userrepository.save during a failure
