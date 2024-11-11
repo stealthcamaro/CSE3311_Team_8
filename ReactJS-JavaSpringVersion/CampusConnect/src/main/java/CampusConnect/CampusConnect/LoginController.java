@@ -26,17 +26,8 @@ public class LoginController {
         this.userService = userService;
     }
 
-
-    //needs to grab the credentials email, password  -> held within the LoginRequest
-
-
-    //needs to verify these credentials match with someone on the database -> 
-        //possible solutions 
-        // userService
-            //regusterRequest
-
-
     //needs return a "ok" response to the front end -> use 'return ResponseEntity.ok().n=body(Body: "login Scuccesfull")'
+    //the RequestBody LoginRequest class must match the json data being recieved from front end.
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         if (!loginRequest.getEmail().endsWith("@mavs.uta.edu")) {
@@ -70,6 +61,13 @@ public class LoginController {
     
         return ResponseEntity.ok().body("Registration successful"); 
     }
+    
+    @PostMapping("/update")
+    public ResponseEntity<?> update(@RequestBody UpdateRequest updateRequest) {
 
+        userService.updateUser(updateRequest);
+
+        return ResponseEntity.ok().body("Update successful"); 
+    }
 }
 

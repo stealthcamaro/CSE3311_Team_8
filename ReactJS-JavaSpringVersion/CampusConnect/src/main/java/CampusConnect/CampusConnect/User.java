@@ -29,7 +29,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String mavid;  // Mav ID field
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String college;
 
     @Column(nullable = false)

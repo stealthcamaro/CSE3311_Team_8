@@ -12,6 +12,7 @@ function RegistrationPage() {
   const [mavid, setMavid] = useState(""); // New
   const [college, setCollege] = useState(""); // New
   const [major, setMajor] = useState(""); // New
+  const [bio, setBio] = useState(""); // New
   const [gradyear, setGradyear] = useState(""); // New
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -41,6 +42,7 @@ function RegistrationPage() {
           gradyear,
           firstName,
           lastName,
+          bio,
         }),
       });
 

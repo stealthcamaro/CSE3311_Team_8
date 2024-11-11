@@ -9,11 +9,12 @@ import PostComponent from "./components/Post";
 import "./App.css";
 
 function App() {
+  const [isEditProfileModalOpen, setEditProfileModalOpen] = useState(false);
   const [isPostModalOpen, setPostModalOpen] = useState(false);
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
   const [isChatVisible, setChatVisible] = useState(false);
   //const [email, setEmail] = useState(null); // Add email state
-  const { setEmail, setMajor } = useContext(AuthContext);
+  const { email, setEmail, setMajor, bio, setBio } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const openPostModal = () => setPostModalOpen(true);
@@ -30,6 +31,32 @@ function App() {
     setEmail(null);
     setMajor(null);
     navigate("/login"); // Redirect to login page
+  };
+
+  const handleEditProfile = () => {
+    setEditProfileModalOpen(true);
+  };
+
+  //change it so that 'setBio' is used in here and not prior to save
+  const handleSaveBio = async (e) => {
+    e.preventDefault();
+    // Logic to save the new bio (e.g., send to backend or update context)
+    try {
+      const response = await fetch("http://localhost:8080/api/auth/update", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          bio,
+        }),
+      });
+    } catch (error) {
+      console.error("An update error occurred:", error);
+    }
+
+    setEditProfileModalOpen(false);
   };
 
   return (
@@ -55,9 +82,28 @@ function App() {
           <div className="modal-content">
             <h2>Settings</h2>
             <p>Settings content here...</p>
+            <button onClick={handleEditProfile}>Edit Profile</button>
             <button onClick={handleLogOut}>Logout</button>{" "}
-            {/* Log Out button */}
             <button onClick={closeSettingsModal}>Close</button>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Profile Modal */}
+      {isEditProfileModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>Edit Bio</h2>
+            <input
+              type="text"
+              placeholder="New Bio"
+              //value="value" // Display current bio or empty string
+              onChange={(e) => setBio(e.target.value)} // Update bio state
+            />
+            <button onClick={handleSaveBio}>Save</button>
+            <button onClick={() => setEditProfileModalOpen(false)}>
+              Close
+            </button>
           </div>
         </div>
       )}

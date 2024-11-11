@@ -53,4 +53,22 @@ public class UserService {
         
         //return false; // Login failed
     }
+
+    public boolean updateUser(UpdateRequest request) {
+        User user = userRepository.findByEmail(request.getEmail());
+        
+        // Check if user exists and the passwords match
+        if (user != null) {
+            
+            //System.out.println("User found --------------------------------- ");
+            //System.out.println(user.getCollege());
+            // by default this doesnt have to do anything 
+            user.setBio(request.getBio());
+            userRepository.save(user);
+                //defualt is set success
+            return true;
+        }
+        
+        return false;
+    }
 }
