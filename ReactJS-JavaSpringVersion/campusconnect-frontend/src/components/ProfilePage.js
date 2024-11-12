@@ -62,7 +62,7 @@ function ProfilePage() {
       {/* Profile Body */}
       <div className="profile-body">
         <div className="profile-posts">
-          <h2>Recent Posts</h2>
+          <h2>My Recent Posts</h2>
           {/* Display fetched posts dynamically */}
           {posts.length > 0 ? (
             posts.map((post) => (
@@ -91,7 +91,7 @@ function ProfilePage() {
         </div>
 
         <div className="profile-connections">
-          <h2>Connections</h2>
+          <h2>My Connections</h2>
           {/* Placeholder for connections */}
           <div className="connection">Alice Johnson</div>
           <div className="connection">Bob Smith</div>

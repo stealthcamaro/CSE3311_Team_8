@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./index";
 import ProfilePage from "./components/ProfilePage";
+import MainPage from "./components/MainPage";
 import Chat from "./components/Chat";
 import Header from "./components/Header";
 import PostComponent from "./components/Post";
@@ -9,12 +10,18 @@ import PostComponent from "./components/Post";
 import "./App.css";
 
 function App() {
+  const [currentPage, setCurrentPage] = useState("profile");
+
   const [isEditProfileModalOpen, setEditProfileModalOpen] = useState(false);
   const [isPostModalOpen, setPostModalOpen] = useState(false);
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
   const [isChatVisible, setChatVisible] = useState(false);
   //const [email, setEmail] = useState(null); // Add email state
   const { email, setEmail, setMajor, bio, setBio } = useContext(AuthContext);
+
+  const switchToProfilePage = () => setCurrentPage("profile");
+  const switchToMainPage = () => setCurrentPage("main");
+
   const navigate = useNavigate();
 
   const openPostModal = () => setPostModalOpen(true);
@@ -33,6 +40,11 @@ function App() {
     navigate("/login"); // Redirect to login page
   };
 
+  const handleMainButton = () => {
+    //navigate("/main");
+    //dont navigate you have to switch from your current render of profile page into a new render of main page
+  };
+
   const handleEditProfile = () => {
     setEditProfileModalOpen(true);
   };
@@ -42,7 +54,7 @@ function App() {
     e.preventDefault();
     // Logic to save the new bio (e.g., send to backend or update context)
     try {
-      const response = await fetch("http://localhost:8080/api/auth/update", {
+      await fetch("http://localhost:8080/api/auth/update", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -62,7 +74,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <ProfilePage />
+      {currentPage === "profile" ? <ProfilePage /> : <MainPage />}
       {/* Post Modal */}
       {isPostModalOpen && (
         <div className="modal">
@@ -112,6 +124,20 @@ function App() {
       {isChatVisible && <Chat />}
 
       <div className="bottom-bar">
+        <button
+          className="bar-button"
+          id="profile-button"
+          onClick={switchToProfilePage}
+        >
+          Profile
+        </button>
+        <button
+          className="bar-button"
+          id="main-button"
+          onClick={switchToMainPage}
+        >
+          Main
+        </button>
         <button className="bar-button" id="post-button" onClick={openPostModal}>
           Post
         </button>
