@@ -19,11 +19,13 @@ public class LoginController {
 
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
+    private final PostService postService;
 
     @Autowired
-    public LoginController(AuthenticationManager authenticationManager, UserService userService) {
+    public LoginController(AuthenticationManager authenticationManager, UserService userService, PostService postService) {
         this.authenticationManager = authenticationManager;
         this.userService = userService;
+        this.postService = postService;
     }
 
     //needs return a "ok" response to the front end -> use 'return ResponseEntity.ok().n=body(Body: "login Scuccesfull")'
@@ -69,5 +71,17 @@ public class LoginController {
 
         return ResponseEntity.ok().body("Update successful"); 
     }
+
+    @PostMapping("/postU")
+    public ResponseEntity<?> update(@RequestBody PostUploadRequest postUploadRequest) {
+        //System.out.println("ehehjdjd--------debug-------------");
+        System.out.println(postUploadRequest.getEmail());
+        System.out.println(postUploadRequest.getContent());
+
+        postService.postUpload(postUploadRequest);
+
+        return ResponseEntity.ok().body("Upload successful"); 
+    }
+
 }
 

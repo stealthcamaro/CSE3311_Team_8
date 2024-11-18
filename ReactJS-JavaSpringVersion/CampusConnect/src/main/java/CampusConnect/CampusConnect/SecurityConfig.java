@@ -37,7 +37,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(new AntPathRequestMatcher("/api/auth/register"),
                                 new AntPathRequestMatcher("/api/auth/login"),
-                                new AntPathRequestMatcher("/api/auth/update")) // Permit public access to register and login endpoints
+                                new AntPathRequestMatcher("/api/auth/update"), 
+                                new AntPathRequestMatcher("/api/auth/postU")) // Permit public access to register and login endpoints
+                                
                         .permitAll()
                         .anyRequest().authenticated()) // Require authentication for all other endpoints
                 .httpBasic(Customizer.withDefaults())

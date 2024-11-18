@@ -21,15 +21,11 @@ function App() {
 
   const switchToProfilePage = () => setCurrentPage("profile");
   const switchToMainPage = () => setCurrentPage("main");
-
   const navigate = useNavigate();
-
   const openPostModal = () => setPostModalOpen(true);
   const closePostModal = () => setPostModalOpen(false);
-
   const openSettingsModal = () => setSettingsModalOpen(true);
   const closeSettingsModal = () => setSettingsModalOpen(false);
-
   const toggleChat = () => setChatVisible(!isChatVisible);
 
   // Function to handle logout
@@ -38,11 +34,6 @@ function App() {
     setEmail(null);
     setMajor(null);
     navigate("/login"); // Redirect to login page
-  };
-
-  const handleMainButton = () => {
-    //navigate("/main");
-    //dont navigate you have to switch from your current render of profile page into a new render of main page
   };
 
   const handleEditProfile = () => {
@@ -75,6 +66,7 @@ function App() {
     <div className="App">
       <Header />
       {currentPage === "profile" ? <ProfilePage /> : <MainPage />}
+
       {/* Post Modal */}
       {isPostModalOpen && (
         <div className="modal">
@@ -93,7 +85,7 @@ function App() {
         <div className="modal">
           <div className="modal-content">
             <h2>Settings</h2>
-            <p>Settings content here...</p>
+            <p></p>
             <button onClick={handleEditProfile}>Edit Profile</button>
             <button onClick={handleLogOut}>Logout</button>{" "}
             <button onClick={closeSettingsModal}>Close</button>
@@ -143,9 +135,6 @@ function App() {
         </button>
         <button className="bar-button" id="connect-button">
           Connect
-        </button>
-        <button className="bar-button" id="chat-button" onClick={toggleChat}>
-          Chat
         </button>
         <button
           className="bar-button"

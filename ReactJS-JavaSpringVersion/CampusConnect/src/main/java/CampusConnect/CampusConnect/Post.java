@@ -33,6 +33,9 @@ public class Post {
     @Column(name = "updated_at", columnDefinition = "TIMESTAMPTZ")
     private OffsetDateTime updatedAt; // Timestamp when the post was last updated
 
+    @Column(name = "email")
+    private String email; 
+
     // Getters and Setters
     public Long getId() {
         return id;
@@ -80,5 +83,13 @@ public class Post {
 
     public void setUpdatedAt(OffsetDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public void setEmail(String email){
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }
