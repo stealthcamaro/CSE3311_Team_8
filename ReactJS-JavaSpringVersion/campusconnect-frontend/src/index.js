@@ -14,6 +14,7 @@ const RootComponent = () => {
   const [major, setMajor] = useState(null);
   const [bio, setBio] = useState(null);
   const [gradyear, setGradyear] = useState(null);
+  const [userId, setUserId] = useState(null); // Add userId to the state
 
   return (
     <AuthContext.Provider
@@ -26,8 +27,17 @@ const RootComponent = () => {
         setBio,
         gradyear,
         setGradyear,
+        userId, // Provide userId to context
+        setUserId, // Provide setter for userId
       }}
     >
+      {console.log("AuthContext values:", { // printing AuthContex for debugging purposes
+    email,
+    major,
+    bio,
+    gradyear,
+    userId,
+      })}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />
@@ -38,6 +48,7 @@ const RootComponent = () => {
     </AuthContext.Provider>
   );
 };
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

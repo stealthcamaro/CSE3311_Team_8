@@ -26,8 +26,8 @@ public class LoginController {
         this.userService = userService;
     }
 
-    //needs return a "ok" response to the front end -> use 'return ResponseEntity.ok().n=body(Body: "login Scuccesfull")'
-    //the RequestBody LoginRequest class must match the json data being recieved from front end.
+    //needs return an "ok" response to the front end -> use 'return ResponseEntity.ok().n=body(Body: "login Successful")'
+    //the RequestBody LoginRequest class must match the json data being received from front end.
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         if (!loginRequest.getEmail().endsWith("@mavs.uta.edu")) {

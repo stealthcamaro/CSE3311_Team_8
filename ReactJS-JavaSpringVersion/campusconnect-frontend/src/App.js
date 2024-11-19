@@ -6,8 +6,9 @@ import MainPage from "./components/MainPage";
 import Chat from "./components/Chat";
 import Header from "./components/Header";
 import PostComponent from "./components/Post";
-//import LoginPage from "./LoginPage";
+// import LoginPage from "./LoginPage";
 import "./App.css";
+import ConnectionPanel from "./components/ConnectionPanel";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("profile");
@@ -16,8 +17,9 @@ function App() {
   const [isPostModalOpen, setPostModalOpen] = useState(false);
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
   const [isChatVisible, setChatVisible] = useState(false);
-  //const [email, setEmail] = useState(null); // Add email state
   const { email, setEmail, setMajor, bio, setBio } = useContext(AuthContext);
+
+  const [isPanelOpen, setPanelOpen] = useState(false); // Connection panel state
 
   const switchToProfilePage = () => setCurrentPage("profile");
   const switchToMainPage = () => setCurrentPage("main");
@@ -32,27 +34,22 @@ function App() {
 
   const toggleChat = () => setChatVisible(!isChatVisible);
 
+  // Toggle the Connection Panel
+  const toggleConnectionPanel = () => setPanelOpen(!isPanelOpen);
+
   // Function to handle logout
   const handleLogOut = () => {
-    // Log out logic (optional)
     setEmail(null);
     setMajor(null);
-    navigate("/login"); // Redirect to login page
-  };
-
-  const handleMainButton = () => {
-    //navigate("/main");
-    //dont navigate you have to switch from your current render of profile page into a new render of main page
+    navigate("/login");
   };
 
   const handleEditProfile = () => {
     setEditProfileModalOpen(true);
   };
 
-  //change it so that 'setBio' is used in here and not prior to save
   const handleSaveBio = async (e) => {
     e.preventDefault();
-    // Logic to save the new bio (e.g., send to backend or update context)
     try {
       await fetch("http://localhost:8080/api/auth/update", {
         method: "POST",
@@ -67,7 +64,6 @@ function App() {
     } catch (error) {
       console.error("An update error occurred:", error);
     }
-
     setEditProfileModalOpen(false);
   };
 
@@ -75,6 +71,7 @@ function App() {
     <div className="App">
       <Header />
       {currentPage === "profile" ? <ProfilePage /> : <MainPage />}
+      
       {/* Post Modal */}
       {isPostModalOpen && (
         <div className="modal">
@@ -93,9 +90,8 @@ function App() {
         <div className="modal">
           <div className="modal-content">
             <h2>Settings</h2>
-            <p>Settings content here...</p>
             <button onClick={handleEditProfile}>Edit Profile</button>
-            <button onClick={handleLogOut}>Logout</button>{" "}
+            <button onClick={handleLogOut}>Logout</button>
             <button onClick={closeSettingsModal}>Close</button>
           </div>
         </div>
@@ -109,8 +105,7 @@ function App() {
             <input
               type="text"
               placeholder="New Bio"
-              //value="value" // Display current bio or empty string
-              onChange={(e) => setBio(e.target.value)} // Update bio state
+              onChange={(e) => setBio(e.target.value)}
             />
             <button onClick={handleSaveBio}>Save</button>
             <button onClick={() => setEditProfileModalOpen(false)}>
@@ -123,35 +118,26 @@ function App() {
       {/* Chat Component */}
       {isChatVisible && <Chat />}
 
+      {/* Connection Panel */}
+      {/* <ConnectionPanel isOpen={isPanelOpen} onClose={toggleConnectionPanel} /> */}
+
       <div className="bottom-bar">
-        <button
-          className="bar-button"
-          id="profile-button"
-          onClick={switchToProfilePage}
-        >
+        <button className="bar-button" id="profile-button" onClick={switchToProfilePage}>
           Profile
         </button>
-        <button
-          className="bar-button"
-          id="main-button"
-          onClick={switchToMainPage}
-        >
+        <button className="bar-button" id="main-button" onClick={switchToMainPage}>
           Main
         </button>
         <button className="bar-button" id="post-button" onClick={openPostModal}>
           Post
         </button>
-        <button className="bar-button" id="connect-button">
+        <button className="bar-button" id="connect-button" onClick={toggleConnectionPanel}>
           Connect
         </button>
-        <button className="bar-button" id="chat-button" onClick={toggleChat}>
+        {/* <button className="bar-button" id="chat-button" onClick={toggleChat}>
           Chat
-        </button>
-        <button
-          className="bar-button"
-          id="settings-button"
-          onClick={openSettingsModal}
-        >
+        </button> */}
+        <button className="bar-button" id="settings-button" onClick={openSettingsModal}>
           Settings
         </button>
       </div>
