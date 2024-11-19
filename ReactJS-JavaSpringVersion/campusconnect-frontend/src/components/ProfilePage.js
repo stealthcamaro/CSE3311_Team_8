@@ -6,6 +6,7 @@ import "./ProfilePage.css";
 function ProfilePage() {
   //const [biography, setBio] = useState("");
   const [posts, setPosts] = useState([]);
+  const [myPosts, setMyPosts] = useState([]);
   const { email, major, bio, gradyear, connections } = useContext(AuthContext); // Access email from context
   const userProfilePicture = null;
   const [connectionsArray, setConnectionsArray] = useState([]);
@@ -15,6 +16,18 @@ function ProfilePage() {
     try {
       const response = await axios.get("http://localhost:8080/api/posts/feed"); // Adjust the endpoint if needed
       setPosts(response.data); // Set the posts in state
+      //for loop iterate through all posts
+      //any posts with matching emails
+      //save to myPosts array
+      const filteredPosts = response.data.filter(
+        (post) => post.email === email
+      );
+      setMyPosts(filteredPosts); // Set the filtered posts to myPosts
+
+      console.log("Debug1");
+
+      console.log(myPosts);
+      console.log("Debug2");
     } catch (error) {
       console.error("Error fetching posts:", error); // Handle any errors
     }
@@ -72,8 +85,8 @@ function ProfilePage() {
         <div className="profile-posts">
           <h2>My Recent Posts</h2>
           {/* Display fetched posts dynamically */}
-          {posts.length > 0 ? (
-            posts.map((post) => (
+          {myPosts.length > 0 ? (
+            myPosts.map((post) => (
               <div
                 key={post.id}
                 className="post"
@@ -88,7 +101,7 @@ function ProfilePage() {
               >
                 <p>
                   <strong>{post.username}</strong>{" "}
-                  <span>{new Date(post.timestamp).toLocaleString()}</span>
+                  {/* <span>{new Date(post.timestamp).toLocaleString()}</span> */}
                 </p>
                 <p>{post.content}</p>
               </div>
