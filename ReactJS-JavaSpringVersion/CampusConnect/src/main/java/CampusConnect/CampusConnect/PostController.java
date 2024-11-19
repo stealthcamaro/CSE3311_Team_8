@@ -14,11 +14,11 @@ public class PostController {
     private PostService postService;
 
     // Endpoint to create a post
-    @PostMapping("/create")
-    public ResponseEntity<Post> createPost(@RequestBody PostRequest postRequest) {
-        Post post = postService.createPost(postRequest.getUserId(), postRequest.getContent());
-        return ResponseEntity.ok(post);
-    }
+    // @PostMapping("/create")
+    // public ResponseEntity<Post> createPost(@RequestBody PostRequest postRequest) {
+    //     Post post = postService.createPost(postRequest.getUserId(), postRequest.getContent());
+    //     return ResponseEntity.ok(post);
+    // }
 
     // Endpoint to get all posts for a user
     @GetMapping("/user/{userId}")

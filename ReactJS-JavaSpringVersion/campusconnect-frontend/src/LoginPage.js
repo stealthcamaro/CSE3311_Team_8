@@ -13,6 +13,7 @@ function LoginPage() {
     setBio,
     setConnections,
     connections,
+    setUserId,
   } = useContext(AuthContext);
 
   const [email, setEmailInput] = useState("");
@@ -57,6 +58,7 @@ function LoginPage() {
         console.log(data);
         console.log(connections);
         console.log("Hello");
+        setUserId(data.userId);
 
         //redirect to login
         //setTimeout(() => navigate("/"), 0);

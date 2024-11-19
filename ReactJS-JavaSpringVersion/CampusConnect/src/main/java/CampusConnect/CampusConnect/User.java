@@ -36,7 +36,7 @@ public class User {
     private String major;
 
     @Column(name = "gradyear", nullable = false)
-    private String gradyear;  // Graduation year field
+    private String gradYear;  // Graduation year field
 
     @Column(nullable = false)
     private String bio;
@@ -119,11 +119,11 @@ public class User {
     }
 
     public String getGradyear() {
-        return gradyear;
+        return gradYear;
     }
 
-    public void setGradyear(String gradyear) {
-        this.gradyear = gradyear;
+    public void setGradyear(String gradYear) {
+        this.gradYear = gradYear;
     }
 
     public void setConnections(String connections) {

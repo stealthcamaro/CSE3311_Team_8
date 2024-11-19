@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 // import axios from "axios";
 import { AuthContext } from "../index";
+import axios from "axios";
 
 function PostComponent({ onClose }) {
   const [content, setContent] = useState("");

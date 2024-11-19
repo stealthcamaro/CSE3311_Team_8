@@ -57,7 +57,7 @@
   
   /* Posts and connections */
   .profile-posts, .profile-connections {
-    width: 45%;
+    width: 30%;
   }
   
   .post, .connection {

@@ -3,12 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./index";
 import ProfilePage from "./components/ProfilePage";
 import MainPage from "./components/MainPage";
-import Chat from "./components/Chat";
+//import Chat from "./components/Chat";
 import Header from "./components/Header";
 import PostComponent from "./components/Post";
 import ConnectionsComponent from "./components/Connections";
-
-//import LoginPage from "./LoginPage";
 import "./App.css";
 
 function App() {
@@ -19,9 +17,10 @@ function App() {
   const [isPostModalOpen, setPostModalOpen] = useState(false);
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
   const [isConnectionsModalOpen, setConnectionsModalOpen] = useState(false);
-  const [isChatVisible, setChatVisible] = useState(false);
-  //const [email, setEmail] = useState(null); // Add email state
+  //const [isChatVisible, setChatVisible] = useState(false);
   const { email, setEmail, setMajor, bio, setBio } = useContext(AuthContext);
+
+  //const [isPanelOpen, setPanelOpen] = useState(false); // Connection panel state
 
   const switchToProfilePage = () => setCurrentPage("profile");
   const switchToMainPage = () => setCurrentPage("main");
@@ -32,11 +31,13 @@ function App() {
   const closeSettingsModal = () => setSettingsModalOpen(false);
   const openConnectionsModal = () => setConnectionsModalOpen(true);
   const closeConnectionsModal = () => setConnectionsModalOpen(false);
-  const toggleChat = () => setChatVisible(!isChatVisible);
+  //const toggleChat = () => setChatVisible(!isChatVisible);
+
+  // Toggle the Connection Panel
+  //const toggleConnectionPanel = () => setPanelOpen(!isPanelOpen);
 
   // Function to handle logout
   const handleLogOut = () => {
-    // Log out logic (optional)
     setEmail(null);
     setMajor(null);
     navigate("/login"); // Redirect to login page
@@ -46,10 +47,8 @@ function App() {
     setEditProfileModalOpen(true);
   };
 
-  //change it so that 'setBio' is used in here and not prior to save
   const handleSaveBio = async (e) => {
     e.preventDefault();
-    // Logic to save the new bio (e.g., send to backend or update context)
     try {
       await fetch("http://localhost:8080/api/auth/update", {
         method: "POST",
@@ -64,7 +63,6 @@ function App() {
     } catch (error) {
       console.error("An update error occurred:", error);
     }
-
     setEditProfileModalOpen(false);
   };
 
@@ -92,7 +90,6 @@ function App() {
     <div className="App">
       <Header />
       {currentPage === "profile" ? <ProfilePage /> : <MainPage />}
-
       {/* Post Modal */}
       {isPostModalOpen && (
         <div className="modal">
@@ -113,7 +110,7 @@ function App() {
             <h2>Settings</h2>
             <p></p>
             <button onClick={handleEditProfile}>Edit Profile</button>
-            <button onClick={handleLogOut}>Logout</button>{" "}
+            <button onClick={handleLogOut}>Logout</button>
             <button onClick={closeSettingsModal}>Close</button>
           </div>
         </div>
@@ -141,8 +138,7 @@ function App() {
             <input
               type="text"
               placeholder="New Bio"
-              //value="value" // Display current bio or empty string
-              onChange={(e) => setBio(e.target.value)} // Update bio state
+              onChange={(e) => setBio(e.target.value)}
             />
             <button onClick={handleSaveBio}>Save</button>
             <button onClick={() => setEditProfileModalOpen(false)}>
@@ -151,9 +147,6 @@ function App() {
           </div>
         </div>
       )}
-
-      {/* Chat Component */}
-      {isChatVisible && <Chat />}
 
       <div className="bottom-bar">
         <button
