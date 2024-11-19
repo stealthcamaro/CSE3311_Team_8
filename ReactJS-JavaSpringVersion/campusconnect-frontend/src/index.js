@@ -14,6 +14,7 @@ const RootComponent = () => {
   const [major, setMajor] = useState(null);
   const [bio, setBio] = useState(null);
   const [gradyear, setGradyear] = useState(null);
+  const [connections, setConnections] = useState(null);
 
   return (
     <AuthContext.Provider
@@ -26,6 +27,8 @@ const RootComponent = () => {
         setBio,
         gradyear,
         setGradyear,
+        connections,
+        setConnections,
       }}
     >
       <BrowserRouter>

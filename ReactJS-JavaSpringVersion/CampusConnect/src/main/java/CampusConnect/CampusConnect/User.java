@@ -41,6 +41,9 @@ public class User {
     @Column(nullable = false)
     private String bio;
 
+    @Column(nullable = false)
+    private String connections;
+
 
     // Getters and Setters for all fields
     public Long getId() {
@@ -121,5 +124,13 @@ public class User {
 
     public void setGradyear(String gradyear) {
         this.gradyear = gradyear;
+    }
+
+    public void setConnections(String connections) {
+        this.connections = connections;
+    }
+
+    public String getConnections() {
+        return connections;
     }
 }

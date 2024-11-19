@@ -6,7 +6,14 @@ import "./LoginPage.css";
 
 function LoginPage() {
   const navigate = useNavigate();
-  const { setEmail, setMajor, setGradyear, setBio } = useContext(AuthContext);
+  const {
+    setEmail,
+    setMajor,
+    setGradyear,
+    setBio,
+    setConnections,
+    connections,
+  } = useContext(AuthContext);
 
   const [email, setEmailInput] = useState("");
   const [password, setPassword] = useState("");
@@ -46,6 +53,10 @@ function LoginPage() {
         setMajor(data.major);
         setGradyear(data.gradyear);
         setBio(data.bio);
+        setConnections(data.connections);
+        console.log(data);
+        console.log(connections);
+        console.log("Hello");
 
         //redirect to login
         //setTimeout(() => navigate("/"), 0);

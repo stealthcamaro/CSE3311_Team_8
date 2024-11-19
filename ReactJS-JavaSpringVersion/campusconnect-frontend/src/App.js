@@ -6,15 +6,19 @@ import MainPage from "./components/MainPage";
 import Chat from "./components/Chat";
 import Header from "./components/Header";
 import PostComponent from "./components/Post";
+import ConnectionsComponent from "./components/Connections";
+
 //import LoginPage from "./LoginPage";
 import "./App.css";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("profile");
+  //const [connectionEmail, setConnectionEmail] = useState("");
 
   const [isEditProfileModalOpen, setEditProfileModalOpen] = useState(false);
   const [isPostModalOpen, setPostModalOpen] = useState(false);
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
+  const [isConnectionsModalOpen, setConnectionsModalOpen] = useState(false);
   const [isChatVisible, setChatVisible] = useState(false);
   //const [email, setEmail] = useState(null); // Add email state
   const { email, setEmail, setMajor, bio, setBio } = useContext(AuthContext);
@@ -26,6 +30,8 @@ function App() {
   const closePostModal = () => setPostModalOpen(false);
   const openSettingsModal = () => setSettingsModalOpen(true);
   const closeSettingsModal = () => setSettingsModalOpen(false);
+  const openConnectionsModal = () => setConnectionsModalOpen(true);
+  const closeConnectionsModal = () => setConnectionsModalOpen(false);
   const toggleChat = () => setChatVisible(!isChatVisible);
 
   // Function to handle logout
@@ -62,6 +68,26 @@ function App() {
     setEditProfileModalOpen(false);
   };
 
+  // const handleFindConnection = async (e) => {
+  //   e.preventDefault();
+  //   //create a list of all emails avaialable on the database
+  //   //make them available to be clicked
+  //   try {
+  //     const response = await fetch("http://localhost:8080/api/auth/findConnection", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         connectionEmail,
+  //       }),
+  //     });
+  //   } catch (error) {
+  //     console.error("An update error occurred:", error);
+  //   }
+
+  // }
+
   return (
     <div className="App">
       <Header />
@@ -89,6 +115,20 @@ function App() {
             <button onClick={handleEditProfile}>Edit Profile</button>
             <button onClick={handleLogOut}>Logout</button>{" "}
             <button onClick={closeSettingsModal}>Close</button>
+          </div>
+        </div>
+      )}
+
+      {/* Connections Modal */}
+      {isConnectionsModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>Connections</h2>
+            <p></p>
+            <ConnectionsComponent onClose={closeConnectionsModal} />
+            <button type="button" onClick={closeConnectionsModal}>
+              Close
+            </button>
           </div>
         </div>
       )}
@@ -130,12 +170,19 @@ function App() {
         >
           Main
         </button>
+
         <button className="bar-button" id="post-button" onClick={openPostModal}>
           Post
         </button>
-        <button className="bar-button" id="connect-button">
+
+        <button
+          className="bar-button"
+          id="connections-button"
+          onClick={openConnectionsModal}
+        >
           Connect
         </button>
+
         <button
           className="bar-button"
           id="settings-button"

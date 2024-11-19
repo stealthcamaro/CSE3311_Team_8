@@ -6,8 +6,9 @@ import "./ProfilePage.css";
 function ProfilePage() {
   //const [biography, setBio] = useState("");
   const [posts, setPosts] = useState([]);
-  const { email, major, bio, gradyear } = useContext(AuthContext); // Access email from context
+  const { email, major, bio, gradyear, connections } = useContext(AuthContext); // Access email from context
   const userProfilePicture = null;
+  const [connectionsArray, setConnectionsArray] = useState([]);
 
   // Function to fetch posts from the backend
   const fetchPosts = async () => {
@@ -36,6 +37,13 @@ function ProfilePage() {
   };
 
   // Fetch posts when the component mounts
+  useEffect(() => {
+    if (connections) {
+      const connectionsArray = connections.split(" ");
+      setConnectionsArray(connectionsArray);
+    }
+  }, [connections]);
+
   useEffect(() => {
     fetchPosts();
   }, []);
@@ -92,9 +100,16 @@ function ProfilePage() {
 
         <div className="profile-connections">
           <h2>My Connections</h2>
-          {/* Placeholder for connections */}
-          <div className="connection">Alice Johnson</div>
-          <div className="connection">Bob Smith</div>
+          {/* Display parsed connections dynamically */}
+          {connectionsArray.length > 0 ? (
+            connectionsArray.map((connection, index) => (
+              <div key={index} className="connection">
+                {connection}
+              </div>
+            ))
+          ) : (
+            <div>No connections available.</div>
+          )}
         </div>
       </div>
     </div>

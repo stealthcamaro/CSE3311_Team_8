@@ -26,6 +26,7 @@ public class UserService {
         user.setMajor(request.getMajor());
         user.setBio(request.getBio());
         user.setGradyear(request.getGradyear());
+        //might need to add connections here.
 
 
         //we know this saves the user 
