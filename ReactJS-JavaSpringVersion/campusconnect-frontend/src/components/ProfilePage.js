@@ -88,7 +88,7 @@ function ProfilePage() {
               >
                 <p>
                   <strong>{post.username}</strong>{" "}
-                  <span>{new Date(post.timestamp).toLocaleString()}</span>
+                  {/* <span>{new Date(post.timestamp).toLocaleString()}</span> */}
                 </p>
                 <p>{post.content}</p>
               </div>
