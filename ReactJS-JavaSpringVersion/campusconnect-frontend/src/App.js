@@ -18,7 +18,8 @@ function App() {
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
   const [isConnectionsModalOpen, setConnectionsModalOpen] = useState(false);
   //const [isChatVisible, setChatVisible] = useState(false);
-  const { email, setEmail, setMajor, bio, setBio } = useContext(AuthContext);
+  const { email, setEmail, setMajor, bio, setBio, connections } =
+    useContext(AuthContext);
 
   //const [isPanelOpen, setPanelOpen] = useState(false); // Connection panel state
 
@@ -31,12 +32,14 @@ function App() {
   const closeSettingsModal = () => setSettingsModalOpen(false);
   const openConnectionsModal = () => setConnectionsModalOpen(true);
   const closeConnectionsModal = () => setConnectionsModalOpen(false);
+
   //const toggleChat = () => setChatVisible(!isChatVisible);
 
   // Toggle the Connection Panel
   //const toggleConnectionPanel = () => setPanelOpen(!isPanelOpen);
 
   // Function to handle logout
+
   const handleLogOut = () => {
     setEmail(null);
     setMajor(null);
@@ -58,6 +61,7 @@ function App() {
         body: JSON.stringify({
           email,
           bio,
+          connections,
         }),
       });
     } catch (error) {
