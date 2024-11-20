@@ -65,11 +65,20 @@ public class UserService {
             //System.out.println(user.getCollege());
             // by default this doesnt have to do anything 
             user.setBio(request.getBio());
+            user.setConnections(request.getConnections());
             userRepository.save(user);
                 //defualt is set success
             return true;
         }
         
+        return false;
+    }
+
+    public boolean findConnection(FindConnectionRequest request){
+        User user = userRepository.findByEmail(request.getConnectionEmail());
+        if (user != null){
+            return true;
+        }
         return false;
     }
 }

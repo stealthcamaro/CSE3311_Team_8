@@ -66,14 +66,16 @@ public class LoginController {
     
     @PostMapping("/update")
     public ResponseEntity<?> update(@RequestBody UpdateRequest updateRequest) {
-
+        System.out.println("Debug6");
+        System.out.println(updateRequest.getConnections());
         userService.updateUser(updateRequest);
+        System.out.println("Debug7 update succesfull");
 
         return ResponseEntity.ok().body("Update successful"); 
     }
 
     @PostMapping("/postU")
-    public ResponseEntity<?> update(@RequestBody PostUploadRequest postUploadRequest) {
+    public ResponseEntity<?> postU(@RequestBody PostUploadRequest postUploadRequest) {
         //System.out.println("ehehjdjd--------debug-------------");
         System.out.println(postUploadRequest.getEmail());
         System.out.println(postUploadRequest.getContent());
@@ -81,6 +83,19 @@ public class LoginController {
         postService.postUpload(postUploadRequest);
 
         return ResponseEntity.ok().body("Upload successful"); 
+    }
+
+    @PostMapping("/findConnection")
+    public ResponseEntity<?> findConnection(@RequestBody FindConnectionRequest findConnectionRequest) {
+       
+       
+        if(userService.findConnection(findConnectionRequest)){
+            System.out.println("Debug5.55");
+            return ResponseEntity.ok().body("Find successful"); 
+        }
+       
+
+       return ResponseEntity.badRequest().body("Find failure");
     }
 
 }
