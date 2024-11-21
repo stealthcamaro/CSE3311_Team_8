@@ -106,7 +106,7 @@ function App() {
           <div className="modal-content">
             <h2>Settings</h2>
             <p></p>
-            <button onClick={handleEditProfile}>Edit Profile</button>
+            <button onClick={handleEditProfile}>Edit Bio</button>
             <button onClick={handleLogOut}>Logout</button>
             <button onClick={closeSettingsModal}>Close</button>
           </div>
