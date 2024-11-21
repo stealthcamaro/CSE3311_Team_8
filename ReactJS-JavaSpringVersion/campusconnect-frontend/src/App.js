@@ -43,7 +43,7 @@ function App() {
   const handleLogOut = () => {
     setEmail(null);
     setMajor(null);
-    navigate("/login"); // Redirect to login page
+    navigate("/"); // Redirect to login page
   };
 
   const handleEditProfile = () => {

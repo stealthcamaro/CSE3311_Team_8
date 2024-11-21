@@ -12,9 +12,10 @@ function RegistrationPage() {
   const [mavid, setMavid] = useState(""); // New
   const [college, setCollege] = useState(""); // New
   const [major, setMajor] = useState(""); // New
-  const [bio, setBio] = useState(""); // New
+  const [bio] = useState(""); // New
   const [gradyear, setGradyear] = useState(""); // New
   const [errorMessage, setErrorMessage] = useState("");
+  const [connections] = useState("");
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -27,6 +28,17 @@ function RegistrationPage() {
     }
 
     try {
+      console.log("handleRegister json body");
+      console.log("email:", email);
+      console.log("password:", password);
+      console.log("mavid:", mavid);
+      console.log("college:", college);
+      console.log("major:", major);
+      console.log("gradyear:", gradyear);
+      console.log("firstName:", firstName);
+      console.log("lastName:", lastName);
+      console.log("bio:", bio);
+      console.log("connections:", connections);
       const response = await fetch("http://localhost:8080/api/auth/register", {
         method: "POST",
         headers: {
@@ -43,6 +55,7 @@ function RegistrationPage() {
           firstName,
           lastName,
           bio,
+          connections,
         }),
       });
 
@@ -51,7 +64,7 @@ function RegistrationPage() {
 
       if (response.ok) {
         // Registration successful, redirect to login
-        navigate("/login");
+        navigate("/");
       } else {
         setErrorMessage("Registration failed. Please try again.");
         //setErrorMessage(response);
@@ -125,7 +138,7 @@ function RegistrationPage() {
           <button type="submit">Register</button>
           <div className="login-link">
             <p>Already have an account?</p>
-            <a onClick={() => navigate("/login")} href="#!">
+            <a onClick={() => navigate("/")} href="#!">
               Login here
             </a>{" "}
             {/* Link to Login Page */}
