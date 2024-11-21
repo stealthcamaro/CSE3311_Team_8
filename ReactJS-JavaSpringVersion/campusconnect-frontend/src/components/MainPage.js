@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../index"; // Import AuthContext
-import "./ProfilePage.css";
+import "./MainPage.css";
 
 function MainPage() {
   //const [biography, setBio] = useState("");
@@ -43,29 +43,28 @@ function MainPage() {
 
   return (
     <div className="main-page">
-      {/* Still uses Profile Header for the time being*/}
-      <div className="profile-header">
+      {/* Profile Header */}
+      <div className="main-profile-header">
         <img
           src={userProfilePicture || "/default-profile.png"} // Default image fallback
           alt="Profile"
-          className="profile-picture"
+          className="main-profile-picture"
         />
-        <div className="profile-info">
-          <h1>{email || "User email"}</h1>{" "}
-          {/* Display email instead of "John Doe" */}
+        <div className="main-profile-info">
+          <h1>{email || "User email"}</h1> {/* Display email */}
         </div>
       </div>
-
+  
       {/* Profile Body */}
-      <div className="profile-body">
-        <div className="profile-posts">
-          <h2><center>My Feed</center></h2>
+      <div className="main-profile-body">
+        <div className="main-profile-posts">
+          <h2>My Feed</h2>
           {/* Display fetched posts dynamically */}
           {posts.length > 0 ? (
             posts.map((post) => (
               <div
                 key={post.id}
-                className="post"
+                className="main-post"
                 onClick={() => {
                   const action = prompt("Choose an action: edit or delete");
                   if (action === "delete") {
@@ -89,6 +88,7 @@ function MainPage() {
       </div>
     </div>
   );
+  
 }
 
 export default MainPage;
