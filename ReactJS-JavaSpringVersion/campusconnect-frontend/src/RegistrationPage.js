@@ -9,7 +9,7 @@ function RegistrationPage() {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [mavid, setMavid] = useState(""); // New
+  const [mavid] = useState("10000000"); // New
   const [college, setCollege] = useState(""); // New
   const [major, setMajor] = useState(""); // New
   const [bio] = useState(""); // New
@@ -105,13 +105,6 @@ function RegistrationPage() {
             placeholder="Last Name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Mav ID"
-            value={mavid}
-            onChange={(e) => setMavid(e.target.value)}
             required
           />
           <input

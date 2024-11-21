@@ -44,8 +44,8 @@ const RootComponent = () => {
       })}
       <BrowserRouter>
         <Routes>
-          <Route path="/app" element={<App />} />
           <Route path="/" element={<LoginPage />} />
+          <Route path="/app" element={<App />} />
           <Route path="/register" element={<RegistrationPage />} />
         </Routes>
       </BrowserRouter>
