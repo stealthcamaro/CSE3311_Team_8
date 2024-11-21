@@ -58,18 +58,37 @@ public class LoginController {
         if (!registerRequest.getEmail().endsWith("@mavs.uta.edu")) {
             return ResponseEntity.badRequest().body("Email must be from the school domain");
         }
-
+        System.out.println("1Debug/register------------------------------------------------------------");
+        System.out.print("email: ");
+        System.out.println(registerRequest.getEmail());
+        System.out.print("password: ");
+        System.out.println(registerRequest.getPassword());
+        System.out.print("mavid: ");
+        System.out.println(registerRequest.getMavid());
+        System.out.print("gradyear: ");
+        System.out.println(registerRequest.getGradyear());
+        System.out.print("firstName: ");
+        System.out.println(registerRequest.getFirstName());
+        System.out.print("lastName: ");
+        System.out.println(registerRequest.getLastName());
+        System.out.print("bio: ");
+        System.out.println(registerRequest.getBio());
+        System.out.print("connections: ");
+        System.out.println(registerRequest.getConnections());
+        System.out.println("2Debug/register-------------------------------------------------------------");
         userService.registerUser(registerRequest); /// returns an exception when a failure is reached
-    
+        System.out.println("3Debug/register- no error in userService.registerUser(registerRequest))"); 
         return ResponseEntity.ok().body("Registration successful"); 
+        //System.out.println("4Debug/register-------------------------"); unreachable
+
     }
     
     @PostMapping("/update")
     public ResponseEntity<?> update(@RequestBody UpdateRequest updateRequest) {
-        System.out.println("Debug6");
-        System.out.println(updateRequest.getConnections());
+        //System.out.println("Debug6");
+        //System.out.println(updateRequest.getConnections());
         userService.updateUser(updateRequest);
-        System.out.println("Debug7 update succesfull");
+        //System.out.println("Debug7 update succesfull");
 
         return ResponseEntity.ok().body("Update successful"); 
     }
@@ -77,8 +96,8 @@ public class LoginController {
     @PostMapping("/postU")
     public ResponseEntity<?> postU(@RequestBody PostUploadRequest postUploadRequest) {
         //System.out.println("ehehjdjd--------debug-------------");
-        System.out.println(postUploadRequest.getEmail());
-        System.out.println(postUploadRequest.getContent());
+        //System.out.println(postUploadRequest.getEmail());
+        //System.out.println(postUploadRequest.getContent());
 
         postService.postUpload(postUploadRequest);
 

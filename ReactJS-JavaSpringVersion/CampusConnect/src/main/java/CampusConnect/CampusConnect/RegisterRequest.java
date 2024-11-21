@@ -10,11 +10,12 @@ public class RegisterRequest {
     private String major;
     private String gradyear;
     private String bio;
+    private String connections;
 
     // Constructors
     public RegisterRequest() {}
 
-    public RegisterRequest(String email, String password, String firstName, String lastName, String mavid, String college, String major, String gradyear, String bio) {
+    public RegisterRequest(String email, String password, String firstName, String lastName, String mavid, String college, String major, String gradyear, String bio, String connections) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -24,6 +25,7 @@ public class RegisterRequest {
         this.major = major;
         this.bio = bio;
         this.gradyear = gradyear;
+        this.connections = connections;
     }
 
     // Getters and Setters
@@ -98,5 +100,13 @@ public class RegisterRequest {
 
     public void setGradyear(String gradyear) {
         this.gradyear = gradyear;
+    }
+
+    public String getConnections() {
+        return connections;
+    }
+
+    public void setConnections(String connections) {
+        this.connections = connections;
     }
 }

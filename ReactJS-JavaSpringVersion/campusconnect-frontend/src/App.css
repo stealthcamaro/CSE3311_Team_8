@@ -1,5 +1,5 @@
 .App {
-  background-color: #0D0D0D;  /* space black */
+  background-color: #0d0d0d; /* space black */
   color: white;
   min-height: 100vh; /*ensures the whole page takes up height */
   margin: 0;
@@ -8,18 +8,29 @@
   flex-direction: column;
 }
 
+/* .bottom-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #1A1A1A; dark gray for contrast 
+  padding-bottom: 20px;
+} */
+
 .bottom-bar {
   position: fixed;
   bottom: 0;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
-  background-color: #1A1A1A; /* dark gray for contrast */
-  padding-bottom: 20px;
+  gap: 50px; /* Adds space between the buttons */
+  background-color: #1a1a1a; /* dark gray for contrast */
+  padding: 10px 20px; /* Adjust padding for additional spacing */
 }
 
 .bar-button {
-  background-color: #2C2C2C;
+  background-color: #2c2c2c;
   border: none;
   color: white;
   padding: 10px 20px;
@@ -28,11 +39,12 @@
 }
 
 .bar-button:hover {
-  background-color: #0064B1;
+  background-color: #0064b1;
 }
 
 /* Ensures the whole page remains black with no white space */
-body, html {
+body,
+html {
   height: 100%;
   margin: 0;
 }
@@ -40,7 +52,6 @@ body, html {
 #root {
   height: 100%;
 }
-
 
 /* Rest of your CSS remains the same */
 
@@ -66,7 +77,7 @@ body, html {
 
 .modal textarea {
   width: 100%;
-  background-color: #1A1A1A;
+  background-color: #1a1a1a;
   color: white;
   border: 1px solid #555555;
   border-radius: 5px;
@@ -76,7 +87,7 @@ body, html {
 
 .modal button {
   margin-top: 10px;
-  background-color: #2C2C2C;
+  background-color: #2c2c2c;
   border: none;
   color: white;
   padding: 10px;
@@ -85,5 +96,5 @@ body, html {
 }
 
 .modal button:hover {
-  background-color: #3E3E3E;
+  background-color: #3e3e3e;
 }

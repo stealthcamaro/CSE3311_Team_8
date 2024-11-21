@@ -18,8 +18,17 @@ function App() {
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
   const [isConnectionsModalOpen, setConnectionsModalOpen] = useState(false);
   //const [isChatVisible, setChatVisible] = useState(false);
-  const { email, setEmail, setMajor, bio, setBio, connections } =
-    useContext(AuthContext);
+  const {
+    email,
+    setEmail,
+    setMajor,
+    bio,
+    setBio,
+    connections,
+    setConnections,
+    setUserId,
+    setGradyear,
+  } = useContext(AuthContext);
 
   //const [isPanelOpen, setPanelOpen] = useState(false); // Connection panel state
 
@@ -43,7 +52,11 @@ function App() {
   const handleLogOut = () => {
     setEmail(null);
     setMajor(null);
-    navigate("/login"); // Redirect to login page
+    setBio(null);
+    setGradyear(null);
+    setConnections(null);
+    setUserId(null);
+    navigate("/"); // Redirect to login page
   };
 
   const handleEditProfile = () => {

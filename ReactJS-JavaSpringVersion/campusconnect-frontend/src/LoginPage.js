@@ -62,7 +62,7 @@ function LoginPage() {
 
         //redirect to login
         //setTimeout(() => navigate("/"), 0);
-        navigate("/");
+        navigate("/App");
       } else {
         setErrorMessage("Login failed. Please try again.");
         // change this to send credentials to profile page so it can fetch aprropriatley
