@@ -55,8 +55,17 @@ function ProfilePage() {
 
   // Fetch posts when the component mounts
   useEffect(() => {
+    // if (connections) {
+    //   const connectionsArray = connections.split(" ");
+    //   setConnectionsArray(connectionsArray);
+    // }
+
     if (connections) {
-      const connectionsArray = connections.split(" ");
+      const connectionsArray = connections
+        .split(" ") // Split the string by spaces
+        .map((email) => email.trim()) // Remove any surrounding spaces
+        .filter((email) => email.includes("@")); // Keep only valid emails
+
       setConnectionsArray(connectionsArray);
     }
   }, [connections]);
