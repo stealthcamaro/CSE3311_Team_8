@@ -57,14 +57,14 @@
   
   /* Posts and connections */
   .profile-posts, .profile-connections {
-    width: 45%;
+    width: 40%;
   }
   
   .post, .connection {
     background-color: #1a1a1a; /* Dark background for posts and connections */
     color: #f0f0f0; /* White text inside the boxes */
     padding: 10px;
-    margin: 10px 0;
+    margin: 15px 0;
     border-radius: 8px;
     border: 1px solid #333; /* Subtle border */
   }

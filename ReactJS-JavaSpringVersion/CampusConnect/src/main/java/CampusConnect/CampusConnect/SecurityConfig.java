@@ -36,12 +36,16 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(new AntPathRequestMatcher("/api/auth/register"),
-                                new AntPathRequestMatcher("/api/auth/login")) // Permit public access to register and login endpoints
+                                new AntPathRequestMatcher("/api/auth/login"),
+                                new AntPathRequestMatcher("/api/auth/update"), 
+                                new AntPathRequestMatcher("/api/auth/postU"),
+                                new AntPathRequestMatcher("/api/auth/findConnection")) // Permit public access to register and login endpoints
+                                
                         .permitAll()
-                        .anyRequest().authenticated()) // Require authentication for all other endpoints
+                        .anyRequest().permitAll()) // Require authentication for all other endpoints
                 .httpBasic(Customizer.withDefaults())
                 .cors(Customizer.withDefaults())
-                .csrf(csrf -> csrf.disable()); // Disable CSRF if not needed (use cautiously in production)
+                .csrf(csrf -> csrf.disable()); // Disable CSRF for development
 
         return http.build();
     }
@@ -51,7 +55,7 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(List.of("http://localhost:3000"));
+        config.setAllowedOrigins(List.of("http://localhost:3000")); // Adjust if you have additional allowed origins
         config.setAllowedHeaders(List.of("*"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 

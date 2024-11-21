@@ -2,7 +2,7 @@ package CampusConnect.CampusConnect;
 
 import jakarta.persistence.*;
 
-//import java.time.LocalDateTime;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -32,6 +32,9 @@ public class Post {
 
     @Column(name = "updated_at", columnDefinition = "TIMESTAMPTZ")
     private OffsetDateTime updatedAt; // Timestamp when the post was last updated
+
+    @Column(name = "email")
+    private String email; 
 
     // Getters and Setters
     public Long getId() {
@@ -80,5 +83,13 @@ public class Post {
 
     public void setUpdatedAt(OffsetDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public void setEmail(String email){
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }

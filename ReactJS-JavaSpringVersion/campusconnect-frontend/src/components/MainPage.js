@@ -1,33 +1,37 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../index"; // Import AuthContext
-import "./ProfilePage.css";
+import "./MainPage.css";
 
-function ProfilePage() {
+function MainPage() {
   //const [biography, setBio] = useState("");
-  const [posts, setPosts] = useState([]);
-  const [myPosts, setMyPosts] = useState([]);
-  const { email, major, bio, gradyear, connections } = useContext(AuthContext); // Access email from context
+
+  const { email, connections } = useContext(AuthContext); // Access email from context
   const userProfilePicture = null;
-  const [connectionsArray, setConnectionsArray] = useState([]);
+
+  const [posts, setPosts] = useState([]);
 
   // Function to fetch posts from the backend
   const fetchPosts = async () => {
     try {
       const response = await axios.get("http://localhost:8080/api/posts/feed"); // Adjust the endpoint if needed
-      setPosts(response.data); // Set the posts in state
-      //for loop iterate through all posts
-      //any posts with matching emails
-      //save to myPosts array
-      const filteredPosts = response.data.filter(
-        (post) => post.email === email
+      // const allFetchedPosts = response.data; // Fetch all posts
+      // const filteredPosts = allFetchedPosts.filter(
+      //   (post) => post.email !== email
+      // );
+      // setPosts(filteredPosts);
+
+      const allFetchedPosts = response.data; // Fetch all posts
+
+      // Convert connections string to an array of emails
+      const connectionEmails = connections ? connections.split(" ") : [];
+
+      // Filter posts to include either posts by the user or posts by connections
+      const filteredPosts = allFetchedPosts.filter(
+        (post) => post.email === email || connectionEmails.includes(post.email)
       );
-      setMyPosts(filteredPosts); // Set the filtered posts to myPosts
 
-      console.log("Debug1");
-
-      console.log(myPosts);
-      console.log("Debug2");
+      setPosts(filteredPosts); // Set the filtered posts
     } catch (error) {
       console.error("Error fetching posts:", error); // Handle any errors
     }
@@ -49,47 +53,34 @@ function ProfilePage() {
     }
   };
 
-  // Fetch posts when the component mounts
-  useEffect(() => {
-    if (connections) {
-      const connectionsArray = connections.split(" ");
-      setConnectionsArray(connectionsArray);
-    }
-  }, [connections]);
-
   useEffect(() => {
     fetchPosts();
   }, []);
 
   return (
-    <div className="profile-page">
+    <div className="main-page">
       {/* Profile Header */}
-      <div className="profile-header">
+      <div className="main-profile-header">
         <img
           src={userProfilePicture || "/default-profile.png"} // Default image fallback
           alt="Profile"
-          className="profile-picture"
+          className="main-profile-picture"
         />
-        <div className="profile-info">
-          <h1>{email || "User email"}</h1>{" "}
-          {/* Display email instead of "John Doe" */}
-          <p>
-            {gradyear || "User gradyear"} | {major || "User Major"}
-          </p>
-          <p>{bio || "User Biography"}</p>
+        <div className="main-profile-info">
+          <h1>{email || "User email"}</h1> {/* Display email */}
         </div>
       </div>
-
+  
       {/* Profile Body */}
-      <div className="profile-body">
-        <div className="profile-posts">
-          <h2>My Recent Posts</h2>
+      <div className="main-profile-body">
+        <div className="main-profile-posts">
+          <h2>My Feed</h2>
           {/* Display fetched posts dynamically */}
-          {myPosts.length > 0 ? (
-            myPosts.map((post) => (
+          {posts.length > 0 ? (
+            posts.map((post) => (
               <div
                 key={post.id}
-                className="post"
+                className="main-post"
                 onClick={() => {
                   const action = prompt("Choose an action: edit or delete");
                   if (action === "delete") {
@@ -103,6 +94,7 @@ function ProfilePage() {
                   <strong>{post.username}</strong>{" "}
                   {/* <span>{new Date(post.timestamp).toLocaleString()}</span> */}
                 </p>
+                <p>{post.email}</p>
                 <p>{post.content}</p>
               </div>
             ))
@@ -110,23 +102,10 @@ function ProfilePage() {
             <div>No posts available.</div>
           )}
         </div>
-
-        <div className="profile-connections">
-          <h2>My Connections</h2>
-          {/* Display parsed connections dynamically */}
-          {connectionsArray.length > 0 ? (
-            connectionsArray.map((connection, index) => (
-              <div key={index} className="connection">
-                {connection}
-              </div>
-            ))
-          ) : (
-            <div>No connections available.</div>
-          )}
-        </div>
       </div>
     </div>
   );
+  
 }
 
-export default ProfilePage;
+export default MainPage;

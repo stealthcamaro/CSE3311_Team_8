@@ -1,90 +1,91 @@
 /* Overall page styling */
 .login-page {
-    padding: 20px;
-    margin: 0 auto;
-    font-family: Arial, sans-serif;
-    background-color: #0d0d0d; /* Space Black background */
-    color: #f0f0f0; /* Light text for contrast */
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    max-width: 400px; /* To centralize the page */
+  padding: 20px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  background-color: #0d0d0d; /* Space Black background */
+  color: #f0f0f0; /* Light text for contrast */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  max-width: 400px; /* To centralize the page */
 }
 
 /* Form container */
 .form-container {
-    background-color: #1a1a1a;
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #333;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    max-width: 350px;
-    margin: 0 auto;
+  background-color: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  max-width: 350px;
+  margin: 0 auto;
 }
 
 .login-body {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Input field styling */
-input[type="email"], input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    background-color: #1a1a1a;
-    color: #f0f0f0;
-    border: 1px solid #333;
-    border-radius: 8px;
-    font-size: 16px;
-    box-sizing: border-box;
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  border: 1px solid #333;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
 }
 
 /* Placeholder text */
 input::placeholder {
-    color: #b0b0b0;
+  color: #b0b0b0;
 }
 
 /* Button styling */
 button {
-    padding: 10px;
-    margin-top: 20px;
-    width: 100%;
-    background-color: #0064B1;
-    color: #f0f0f0;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
+  padding: 10px;
+  margin: 10px auto;
+  width: calc(100% - 20px);
+  background-color: #0064b1;
+  color: #f0f0f0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 /* Hover effect for buttons */
 button:hover {
-    background-color: #0080FF;
+  background-color: #0080ff;
 }
 
 /* Link styling */
 .registration-link {
-    text-align: center;
-    margin-top: 10px;
+  text-align: center;
+  margin-top: 10px;
 }
 
 .registration-link p {
-    margin: 0;
+  margin: 0;
 }
 
 a {
-    color: #0064B1;
-    text-decoration: none;
-    font-size: 14px;
+  color: #0064b1;
+  text-decoration: none;
+  font-size: 14px;
 }
 
 a:hover {
-    color: #0080FF;
+  color: #0080ff;
 }
 
 /* Error message styling */
 .error-message {
-    color: #ff4d4d;
-    font-size: 14px;
-    margin-bottom: 10px;
+  color: #ff4d4d;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
