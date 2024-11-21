@@ -10,7 +10,7 @@ import ConnectionsComponent from "./components/Connections";
 import "./App.css";
 
 function App() {
-  const [currentPage, setCurrentPage] = useState("profile");
+  const [currentPage, setCurrentPage] = useState("main");
   //const [connectionEmail, setConnectionEmail] = useState("");
 
   const [isEditProfileModalOpen, setEditProfileModalOpen] = useState(false);
@@ -56,7 +56,7 @@ function App() {
     setGradyear(null);
     setConnections(null);
     setUserId(null);
-    navigate("/"); // Redirect to login page
+    navigate("/"); // Redirect to login
   };
 
   const handleEditProfile = () => {
@@ -83,30 +83,10 @@ function App() {
     setEditProfileModalOpen(false);
   };
 
-  // const handleFindConnection = async (e) => {
-  //   e.preventDefault();
-  //   //create a list of all emails avaialable on the database
-  //   //make them available to be clicked
-  //   try {
-  //     const response = await fetch("http://localhost:8080/api/auth/findConnection", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         connectionEmail,
-  //       }),
-  //     });
-  //   } catch (error) {
-  //     console.error("An update error occurred:", error);
-  //   }
-
-  // }
-
   return (
     <div className="App">
       <Header />
-      {currentPage === "profile" ? <ProfilePage /> : <MainPage />}
+      {currentPage === "main" ? <MainPage /> : <ProfilePage />}
       {/* Post Modal */}
       {isPostModalOpen && (
         <div className="modal">
@@ -168,17 +148,17 @@ function App() {
       <div className="bottom-bar">
         <button
           className="bar-button"
-          id="profile-button"
-          onClick={switchToProfilePage}
-        >
-          Profile
-        </button>
-        <button
-          className="bar-button"
           id="main-button"
           onClick={switchToMainPage}
         >
           Main
+        </button>
+        <button
+          className="bar-button"
+          id="profile-button"
+          onClick={switchToProfilePage}
+        >
+          Profile
         </button>
 
         <button className="bar-button" id="post-button" onClick={openPostModal}>
