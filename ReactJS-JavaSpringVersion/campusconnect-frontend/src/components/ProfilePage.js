@@ -22,7 +22,11 @@ function ProfilePage() {
       const filteredPosts = response.data.filter(
         (post) => post.email === email
       );
-      setMyPosts(filteredPosts); // Set the filtered posts to myPosts
+
+      const reversedPosts = filteredPosts.reverse();
+
+      setMyPosts(reversedPosts); // Set the reversed posts
+      //setMyPosts(filteredPosts); // Set the filtered posts to myPosts
 
       console.log("Debug1");
 

@@ -31,7 +31,11 @@ function MainPage() {
         (post) => post.email === email || connectionEmails.includes(post.email)
       );
 
-      setPosts(filteredPosts); // Set the filtered posts
+      const reversedPosts = filteredPosts.reverse();
+
+      setPosts(reversedPosts); // Set the reversed posts
+
+      //setPosts(filteredPosts); // Set the filtered posts
     } catch (error) {
       console.error("Error fetching posts:", error); // Handle any errors
     }
@@ -70,7 +74,7 @@ function MainPage() {
           <h1>{email || "User email"}</h1> {/* Display email */}
         </div>
       </div>
-  
+
       {/* Profile Body */}
       <div className="main-profile-body">
         <div className="main-profile-posts">
@@ -105,7 +109,6 @@ function MainPage() {
       </div>
     </div>
   );
-  
 }
 
 export default MainPage;
