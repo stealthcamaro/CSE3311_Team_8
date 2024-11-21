@@ -3,6 +3,7 @@ import { AuthContext } from "./index"; // Import the context
 //import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
+import Header from "./components/Header";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -73,6 +74,7 @@ function LoginPage() {
   };
   return (
     <div className="login-page">
+      <Header />
       <div className="form-container">
         <h1>Login</h1>
         <form className="login-body" onSubmit={handleLogin}>

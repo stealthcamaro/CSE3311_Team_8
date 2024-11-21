@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./RegistrationPage.css";
+import Header from "./components/Header";
 
 function RegistrationPage() {
   const navigate = useNavigate();
@@ -75,6 +76,7 @@ function RegistrationPage() {
   };
   return (
     <div className="registration-page">
+      <Header />
       <div className="form-container">
         <h1>Register</h1>
         {errorMessage && <div className="error-message">{errorMessage}</div>}

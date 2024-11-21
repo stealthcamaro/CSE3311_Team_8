@@ -8,20 +8,11 @@
   flex-direction: column;
 }
 
-/* .bottom-bar {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  background-color: #1A1A1A; dark gray for contrast 
-  padding-bottom: 20px;
-} */
-
 .bottom-bar {
   position: fixed;
   bottom: 0;
-  width: 97%;
+  right: 0;
+  width: 98%;
   display: flex;
   justify-content: space-evenly;
   gap: 50px; /* Adds space between the buttons */
