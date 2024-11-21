@@ -6,7 +6,7 @@ import "./ProfilePage.css";
 function MainPage() {
   //const [biography, setBio] = useState("");
 
-  const { email } = useContext(AuthContext); // Access email from context
+  const { email, connections } = useContext(AuthContext); // Access email from context
   const userProfilePicture = null;
 
   const [posts, setPosts] = useState([]);
@@ -15,7 +15,23 @@ function MainPage() {
   const fetchPosts = async () => {
     try {
       const response = await axios.get("http://localhost:8080/api/posts/feed"); // Adjust the endpoint if needed
-      setPosts(response.data); // Set the posts in state
+      // const allFetchedPosts = response.data; // Fetch all posts
+      // const filteredPosts = allFetchedPosts.filter(
+      //   (post) => post.email !== email
+      // );
+      // setPosts(filteredPosts);
+
+      const allFetchedPosts = response.data; // Fetch all posts
+
+      // Convert connections string to an array of emails
+      const connectionEmails = connections ? connections.split(" ") : [];
+
+      // Filter posts to include either posts by the user or posts by connections
+      const filteredPosts = allFetchedPosts.filter(
+        (post) => post.email === email || connectionEmails.includes(post.email)
+      );
+
+      setPosts(filteredPosts); // Set the filtered posts
     } catch (error) {
       console.error("Error fetching posts:", error); // Handle any errors
     }
@@ -59,7 +75,9 @@ function MainPage() {
       {/* Profile Body */}
       <div className="profile-body">
         <div className="profile-posts">
-          <h2><center>My Feed</center></h2>
+          <h2>
+            <center>My Feed</center>
+          </h2>
           {/* Display fetched posts dynamically */}
           {posts.length > 0 ? (
             posts.map((post) => (
@@ -79,6 +97,7 @@ function MainPage() {
                   <strong>{post.username}</strong>{" "}
                   {/* <span>{new Date(post.timestamp).toLocaleString()}</span> */}
                 </p>
+                <p>{post.email}</p>
                 <p>{post.content}</p>
               </div>
             ))
